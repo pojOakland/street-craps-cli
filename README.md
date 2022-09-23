@@ -1,0 +1,1 @@
+This is a CLI application that lets you play street craps against a friend (or foe).
