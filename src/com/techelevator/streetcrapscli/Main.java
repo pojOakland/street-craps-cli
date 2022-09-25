@@ -18,7 +18,7 @@ public class Main {
         System.out.println("*       Lets       *");
         System.out.println("*       Play       *");
         System.out.println("*       Dice       *");
-        System.out.println("*       V0.6       *");
+        System.out.println("*       V0.7       *");
         System.out.println("********************");
         System.out.println();
         System.out.println("Enter Player 1's name:");
@@ -63,13 +63,25 @@ public class Main {
             System.out.println("");
             System.out.println(currentPlayer + " is the shooter, do you want to keep playing?");
 
-            String play = inputScanner.nextLine().trim();
-
-            while (play.equalsIgnoreCase("it was a good day")){
-                currentPlayer = game.itWasAGoodDay().getName();
-                play = inputScanner.nextLine().trim();
+            userInput = inputScanner.nextLine().trim();
+            while (userInput.length() <= 0 || !userInput.equalsIgnoreCase("yes") &&
+                    !userInput.equalsIgnoreCase("it was a good day") &&
+                    !userInput.equalsIgnoreCase("no")){
+                System.out.println(currentPlayer + " is the shooter, do you want to keep playing?");
+                userInput = inputScanner.nextLine().trim();
             }
-            if (play.equalsIgnoreCase("yes")) {
+
+            while (userInput.equalsIgnoreCase("it was a good day")){
+                currentPlayer = game.itWasAGoodDay().getName();
+                userInput = inputScanner.nextLine().trim();
+                while (userInput.length() <= 0 || !userInput.equalsIgnoreCase("yes") &&
+                        !userInput.equalsIgnoreCase("it was a good day") &&
+                        !userInput.equalsIgnoreCase("no")){
+                    System.out.println(currentPlayer + " is the shooter, do you want to keep playing?");
+                    userInput = inputScanner.nextLine().trim();
+                }
+            }
+            if (userInput.equalsIgnoreCase("yes")) {
                 keepPlaying = true;
             }
             else {
