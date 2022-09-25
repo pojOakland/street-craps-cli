@@ -18,7 +18,7 @@ public class Main {
         System.out.println("*       Lets       *");
         System.out.println("*       Play       *");
         System.out.println("*       Dice       *");
-        System.out.println("*       V0.4       *");
+        System.out.println("*       V0.5       *");
         System.out.println("********************");
         System.out.println();
         System.out.println("Enter Player 1's name:");
@@ -49,9 +49,14 @@ public class Main {
             String currentPlayer = game.run().getName();
 
             System.out.println("");
-            System.out.println(currentPlayer + " has the dice, do you want to keep playing?");
+            System.out.println(currentPlayer + " is the shooter, do you want to keep playing?");
 
             String play = inputScanner.nextLine().trim();
+
+            while (play.equalsIgnoreCase("it was a good day")){
+                currentPlayer = game.itWasAGoodDay().getName();
+                play = inputScanner.nextLine().trim();
+            }
             if (play.equalsIgnoreCase("yes")) {
                 keepPlaying = true;
             }
