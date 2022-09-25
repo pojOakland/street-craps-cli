@@ -3,7 +3,7 @@ package com.techelevator.streetcrapscli;
 public class Player {
 
     // Properties
-    private String name;
+    private final String name;
     private int bankroll;
 
     //Constructors

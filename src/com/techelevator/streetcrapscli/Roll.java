@@ -7,13 +7,11 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Roll {
 
     // Properties
-    private Integer die1;
-    private Integer die2;
-    private Integer result;
+    private int result;
     private String name;
 
     // Constants
-    public static final Map<Integer, String> rollMap = new HashMap<Integer, String>(){
+    public static final Map<Integer, String> rollMap = new HashMap<>(){
         {
             put(11,"Crap Two, Snake Eyes");
             put(12, "Crap Three, Australian Yo");
@@ -66,8 +64,8 @@ public class Roll {
 
     // Methods
     public void newRoll() {
-        this.die1 = ThreadLocalRandom.current().nextInt(1, 7);
-        this.die2 = ThreadLocalRandom.current().nextInt(1, 7);
+        Integer die1 = ThreadLocalRandom.current().nextInt(1, 7);
+        Integer die2 = ThreadLocalRandom.current().nextInt(1, 7);
         String s = die1.toString() + die2.toString();
         Integer i = Integer.parseInt(s);
         result = die1 + die2;

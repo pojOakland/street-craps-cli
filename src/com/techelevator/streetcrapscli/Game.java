@@ -6,7 +6,6 @@ public class Game {
     private Player[] players;
     private int stakes;
     private int point;
-    private int startingPlayerIndex;
     private Player activePlayer;
     private Player inactivePlayer;
     private Player winningPlayer;
@@ -24,7 +23,6 @@ public class Game {
     public Game(Player[] players, int stakes, int startingPlayerIndex) {
         this.players = players;
         this.stakes = stakes;
-        this.startingPlayerIndex = startingPlayerIndex;
         if (startingPlayerIndex == 0) {
             activePlayer = players[0];
             inactivePlayer = players[1];
@@ -39,7 +37,7 @@ public class Game {
     // Methods
     public Player run() {
 
-        System.out.println("");
+        System.out.println();
         System.out.println(activePlayer.getName() + " is coming out...");
         roll.newRoll();
         System.out.println(roll.getResult() + " " + roll.getName() + ".");
@@ -51,7 +49,7 @@ public class Game {
             losingPlayer.setBankroll(losingPlayer.getBankroll() - stakes);
 
             System.out.println(winningPlayer.getName() + " wins!");
-            System.out.println("");
+            System.out.println();
             System.out.println("Players current bankrolls:");
 
             for (Player player : players) {
@@ -68,7 +66,7 @@ public class Game {
             losingPlayer.setBankroll(losingPlayer.getBankroll() - stakes);
 
             System.out.println(winningPlayer.getName() + " wins!");
-            System.out.println("");
+            System.out.println();
             System.out.println("Players current bankrolls:");
 
             for (Player player : players) {
@@ -80,9 +78,9 @@ public class Game {
         else {
             point = roll.getResult();
 
-            System.out.println("");
+            System.out.println();
             System.out.println("The point is " + point + ".");
-            System.out.println("");
+            System.out.println();
 
         }
 
@@ -91,7 +89,7 @@ public class Game {
             System.out.println(activePlayer.getName() + " is rolling...");
             roll.newRoll();
             System.out.println(roll.getResult() + " " + roll.getName() + ".");
-            System.out.println("");
+            System.out.println();
 
         } while (roll.getResult() != point && roll.getResult() != 7);
 
@@ -102,13 +100,12 @@ public class Game {
             losingPlayer.setBankroll(losingPlayer.getBankroll() - stakes);
 
             System.out.println(winningPlayer.getName() + " wins!");
-            System.out.println("");
+            System.out.println();
             System.out.println("Players current bankrolls:");
             for (Player player : players) {
                 System.out.println(player.getName() + ": $" + player.getBankroll());
             }
 
-            return activePlayer;
         }
         else {
             winningPlayer = inactivePlayer;
@@ -119,14 +116,14 @@ public class Game {
             losingPlayer.setBankroll(losingPlayer.getBankroll() - stakes);
 
             System.out.println(winningPlayer.getName() + " wins!");
-            System.out.println("");
+            System.out.println();
             System.out.println("Players current bankrolls:");
             for (Player player : players) {
                 System.out.println(player.getName() + ": $" + player.getBankroll());
             }
 
-            return activePlayer;
         }
+        return activePlayer;
     }
 
     public Player itWasAGoodDay() {
@@ -134,53 +131,53 @@ public class Game {
         losingPlayer = inactivePlayer;
 
         for (int i = 0; i < 6; i++) {
-            System.out.println("");
+            System.out.println();
             System.out.println(activePlayer.getName() + " is coming out...");
-            System.out.println(IWAGD_ROLL_ARRAY[i].toString() + IWAGD_ROLL_NAME_ARRAY[i]);
+            System.out.println(IWAGD_ROLL_ARRAY[i] + IWAGD_ROLL_NAME_ARRAY[i]);
 
 
             winningPlayer.setBankroll(winningPlayer.getBankroll() + stakes);
             losingPlayer.setBankroll(losingPlayer.getBankroll() - stakes);
 
             System.out.println(winningPlayer.getName() + " wins!");
-            System.out.println("");
+            System.out.println();
             System.out.println("Players current bankrolls:");
 
             for (Player player : players) {
                 System.out.println(player.getName() + ": $" + player.getBankroll());
             }
 
-            System.out.println("");
+            System.out.println();
             System.out.println(activePlayer.getName() + " is the shooter, do you want to keep playing?");
             System.out.println("yes");
 
         }
 
-        System.out.println("");
+        System.out.println();
         System.out.println(activePlayer.getName() + " is coming out...");
-        System.out.println(IWAGD_ROLL_ARRAY[6].toString() + IWAGD_ROLL_NAME_ARRAY[6]);
+        System.out.println(IWAGD_ROLL_ARRAY[6] + IWAGD_ROLL_NAME_ARRAY[6]);
 
         point = IWAGD_ROLL_ARRAY[6];
 
-        System.out.println("");
+        System.out.println();
         System.out.println("The point is " + point + ".");
-        System.out.println("");
+        System.out.println();
 
         System.out.println(activePlayer.getName() + " is rolling...");
-        System.out.println(IWAGD_ROLL_ARRAY[7].toString() + IWAGD_ROLL_NAME_ARRAY[7]);
-        System.out.println("");
+        System.out.println(IWAGD_ROLL_ARRAY[7] + IWAGD_ROLL_NAME_ARRAY[7]);
+        System.out.println();
 
         winningPlayer.setBankroll(winningPlayer.getBankroll() + stakes);
         losingPlayer.setBankroll(losingPlayer.getBankroll() - stakes);
 
         System.out.println(winningPlayer.getName() + " wins!");
-        System.out.println("");
+        System.out.println();
         System.out.println("Players current bankrolls:");
         for (Player player : players) {
             System.out.println(player.getName() + ": $" + player.getBankroll());
         }
 
-        System.out.println("");
+        System.out.println();
         System.out.println(activePlayer.getName() + " is the shooter, do you want to keep playing?");
 
         return activePlayer;
