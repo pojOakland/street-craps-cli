@@ -50,7 +50,7 @@ public class Roll {
     private static final int[] eleven56 = new int[] {5,6};
     private static final int[] eleven65 = new int[] {6,5};
     private static final int[] twelve66 = new int[] {6,6};
-    private static final Map<int[], String> rollMap = new HashMap<>(){
+    public static final Map<int[], String> rollMap = new HashMap<int[], String>(){
         {
             put(two11,"Crap Two, Snake Eyes");
             put(three12, "Crap Three, Australian Yo");

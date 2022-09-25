@@ -9,15 +9,16 @@ public class Main {
         Scanner inputScanner = new Scanner(System.in);
         String userInput;
         int stakes;
-        int startingPlayer = ThreadLocalRandom.current().nextInt(0, 2);
+        int startingPlayerIndex = ThreadLocalRandom.current().nextInt(0, 2);
         Player[] players = new Player[2];
+        boolean keepPlaying;
 
         System.out.println();
         System.out.println("********************");
         System.out.println("*       Lets       *");
         System.out.println("*       Play       *");
         System.out.println("*       Dice       *");
-        System.out.println("*       V0.2       *");
+        System.out.println("*       V0.3       *");
         System.out.println("********************");
         System.out.println();
         System.out.println("Enter Player 1's name:");
@@ -40,7 +41,38 @@ public class Main {
         stakes = Integer.parseInt(userInput);
 
         System.out.println("");
-        System.out.printf(players[startingPlayer].getName() + " goes first");
+        System.out.println(players[startingPlayerIndex].getName() + " goes first");
+
+        Game game = new Game(players, stakes, startingPlayerIndex);
+        do {
+            String currentPlayer = game.run().getName();
+            System.out.println("");
+            System.out.println(currentPlayer + " has the dice, do you want to keep playing?");
+            String play = inputScanner.nextLine().trim();
+            if (play.equalsIgnoreCase("yes")) {
+                keepPlaying = true;
+            }
+            else {
+                keepPlaying = false;
+            }
+
+
+        } while (keepPlaying);
+
+        if (player1.getBankroll() == player2.getBankroll()) {
+            System.out.println("");
+            System.out.println("The game ends all square.");
+        }
+        else if (player1.getBankroll() > player2.getBankroll()) {
+            System.out.println("");
+            System.out.println(player2.getName() + " owes " + player1.getName() + " $" + player1.getBankroll() + ".");
+        }
+        else {
+            System.out.println("");
+            System.out.println(player1.getName() + " owes " + player2.getName() + " $" + player2.getBankroll() + ".");
+        }
+
+
 
         inputScanner.close();
     }
