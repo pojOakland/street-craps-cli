@@ -18,12 +18,16 @@ public class Main {
         System.out.println("*       Lets       *");
         System.out.println("*       Play       *");
         System.out.println("*       Dice       *");
-        System.out.println("*       V0.5       *");
+        System.out.println("*       V0.6       *");
         System.out.println("********************");
         System.out.println();
         System.out.println("Enter Player 1's name:");
 
         userInput = inputScanner.nextLine().trim();
+        while (userInput.length() <= 0) {
+            System.out.println("Enter Player 1's name:");
+            userInput = inputScanner.nextLine().trim();
+        }
         Player player1 = new Player(userInput);
         players[0] = player1;
 
@@ -31,6 +35,10 @@ public class Main {
         System.out.println("Enter Player 2's name:");
 
         userInput = inputScanner.nextLine().trim();
+        while (userInput.length() <= 0) {
+            System.out.println("Enter Player 2's name:");
+            userInput = inputScanner.nextLine().trim();
+        }
         Player player2 = new Player(userInput);
         players[1] = player2;
 
@@ -38,6 +46,10 @@ public class Main {
         System.out.println("Enter the stakes for the game (whole dollars):");
 
         userInput = inputScanner.nextLine().trim();
+        while (userInput.length() <= 0) {
+            System.out.println("Enter the stakes for the game (whole dollars):");
+            userInput = inputScanner.nextLine().trim();
+        }
         stakes = Integer.parseInt(userInput);
 
         System.out.println("");
