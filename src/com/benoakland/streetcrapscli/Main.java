@@ -53,13 +53,19 @@ public class Main {
         while (stakes == 0) {
             try {
                 userInput = inputScanner.nextLine().trim();
-                while (userInput.length() <= 0) {
-                    System.out.println("Enter the stakes for the game:");
+                while (userInput.length() <= 0 || Integer.parseInt(userInput) <= 0) {
+                    if (Integer.parseInt(userInput) <= 0) {
+                        System.out.println();
+                        System.out.println("Stakes must be a positive whole number");
+                        System.out.println("Enter the stakes for the game:");
+                    }
                     userInput = inputScanner.nextLine().trim();
                 }
                 stakes = Integer.parseInt(userInput);
             } catch (Exception e) {
-                System.out.println("Please enter a whole number for the stakes:");
+                System.out.println();
+                System.out.println("Stakes must be a positive whole number");
+                System.out.println("Enter the stakes for the game:");
             }
         }
 
@@ -78,6 +84,7 @@ public class Main {
             while (userInput.length() <= 0 || !userInput.equalsIgnoreCase("yes") &&
                     !userInput.equalsIgnoreCase("it was a good day") &&
                     !userInput.equalsIgnoreCase("no")){
+                System.out.println();
                 System.out.println(currentPlayer + " is the shooter, do you want to keep playing?");
                 userInput = inputScanner.nextLine().trim();
             }
@@ -88,6 +95,7 @@ public class Main {
                 while (userInput.length() <= 0 || !userInput.equalsIgnoreCase("yes") &&
                         !userInput.equalsIgnoreCase("it was a good day") &&
                         !userInput.equalsIgnoreCase("no")){
+                    System.out.println();
                     System.out.println(currentPlayer + " is the shooter, do you want to keep playing?");
                     userInput = inputScanner.nextLine().trim();
                 }
