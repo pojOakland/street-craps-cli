@@ -1,4 +1,4 @@
-package com.techelevator.streetcrapscli;
+package com.benoakland.streetcrapscli;
 
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
@@ -8,7 +8,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner inputScanner = new Scanner(System.in);
         String userInput;
-        int stakes;
+        int stakes = 0;
         int startingPlayerIndex = ThreadLocalRandom.current().nextInt(0, 2);
         Player[] players = new Player[2];
         boolean keepPlaying;
@@ -18,9 +18,10 @@ public class Main {
         System.out.println("*       Lets       *");
         System.out.println("*       Play       *");
         System.out.println("*       Dice       *");
-        System.out.println("*       V0.8       *");
+        System.out.println("*       V0.9       *");
         System.out.println("********************");
         System.out.println();
+
         System.out.println("Enter Player 1's name:");
 
         userInput = inputScanner.nextLine().trim();
@@ -47,17 +48,20 @@ public class Main {
         players[1] = player2;
 
         System.out.println();
-        System.out.println("Enter the stakes for the game (whole dollars):");
+        System.out.println("Enter the stakes for the game:");
 
-        userInput = inputScanner.nextLine().trim();
-        while (userInput.length() <= 0) {
-            System.out.println("Enter the stakes for the game (whole dollars):");
-            userInput = inputScanner.nextLine().trim();
+        while (stakes == 0) {
+            try {
+                userInput = inputScanner.nextLine().trim();
+                while (userInput.length() <= 0) {
+                    System.out.println("Enter the stakes for the game:");
+                    userInput = inputScanner.nextLine().trim();
+                }
+                stakes = Integer.parseInt(userInput);
+            } catch (Exception e) {
+                System.out.println("Please enter a whole number for the stakes:");
+            }
         }
-
-        // TODO - need to also ensure the user enters an integer for stakes
-
-        stakes = Integer.parseInt(userInput);
 
         System.out.println();
         System.out.println(players[startingPlayerIndex].getName() + " goes first");

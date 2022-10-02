@@ -1,4 +1,4 @@
-package com.techelevator.streetcrapscli;
+package com.benoakland.streetcrapscli;
 
 public class Game {
 
@@ -16,8 +16,6 @@ public class Game {
     private static final Integer[] IWAGD_ROLL_ARRAY = new Integer[] {7,7,11,7,11,7,4,4};
     private static final String[] IWAGD_ROLL_NAME_ARRAY = new String[] {" Seven Out.", " Seven Out.", " YO.",
             " Seven Out.", " YO.", " Seven Out.", " Hard Four, Little Joe.", " Hard Four, Backdoor Little Joe!"};
-
-
 
     // Constructors
     public Game(Player[] players, int stakes, int startingPlayerIndex) {

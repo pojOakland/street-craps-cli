@@ -1,4 +1,4 @@
-package com.techelevator.streetcrapscli;
+package com.benoakland.streetcrapscli;
 
 public class Player {
 
@@ -6,7 +6,7 @@ public class Player {
     private final String name;
     private int bankroll;
 
-    //Constructors
+    // Constructors
     public Player(String name) {
         this.name = name;
         this.bankroll = 0;
