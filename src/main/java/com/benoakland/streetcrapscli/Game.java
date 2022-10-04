@@ -176,7 +176,7 @@ public class Game {
         }
 
         System.out.println();
-        System.out.println(activePlayer.getName() + " is the shooter, do you want to keep playing?");
+        System.out.print(activePlayer.getName() + " is the shooter, do you want to keep playing? ");
 
         return activePlayer;
     }
