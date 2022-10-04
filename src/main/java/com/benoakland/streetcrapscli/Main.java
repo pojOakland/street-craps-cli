@@ -18,22 +18,22 @@ public class Main {
         System.out.println("*       Lets       *");
         System.out.println("*       Play       *");
         System.out.println("*       Dice       *");
-        System.out.println("*       V0.9       *");
+        System.out.println("*       V1.0       *");
         System.out.println("********************");
         System.out.println();
 
-        System.out.println("Enter Player 1's name:");
+        System.out.print("Enter Player 1's name: ");
 
         userInput = inputScanner.nextLine().trim();
         while (userInput.length() <= 0) {
-            System.out.println("Enter Player 1's name:");
+            System.out.print("Enter Player 1's name: ");
             userInput = inputScanner.nextLine().trim();
         }
         Player player1 = new Player(userInput);
         players[0] = player1;
 
         System.out.println();
-        System.out.println("Enter Player 2's name:");
+        System.out.print("Enter Player 2's name: ");
 
         userInput = inputScanner.nextLine().trim();
         while (userInput.length() <= 0 || userInput.equalsIgnoreCase(player1.getName())) {
@@ -41,14 +41,14 @@ public class Main {
                 System.out.println();
                 System.out.println("Players must have different names.");
             }
-            System.out.println("Enter Player 2's name:");
+            System.out.print("Enter Player 2's name: ");
             userInput = inputScanner.nextLine().trim();
         }
         Player player2 = new Player(userInput);
         players[1] = player2;
 
         System.out.println();
-        System.out.println("Enter the stakes for the game:");
+        System.out.print("Enter the stakes for the game: ");
 
         while (stakes == 0) {
             try {
@@ -57,7 +57,7 @@ public class Main {
                     if (Integer.parseInt(userInput) <= 0) {
                         System.out.println();
                         System.out.println("Stakes must be a positive whole number");
-                        System.out.println("Enter the stakes for the game:");
+                        System.out.print("Enter the stakes for the game: ");
                     }
                     userInput = inputScanner.nextLine().trim();
                 }
@@ -65,7 +65,7 @@ public class Main {
             } catch (Exception e) {
                 System.out.println();
                 System.out.println("Stakes must be a positive whole number");
-                System.out.println("Enter the stakes for the game:");
+                System.out.print("Enter the stakes for the game: ");
             }
         }
 
@@ -78,14 +78,14 @@ public class Main {
             String currentPlayer = game.run().getName();
 
             System.out.println();
-            System.out.println(currentPlayer + " is the shooter, do you want to keep playing?");
+            System.out.print(currentPlayer + " is the shooter, do you want to keep playing? ");
 
             userInput = inputScanner.nextLine().trim();
             while (userInput.length() <= 0 || !userInput.equalsIgnoreCase("yes") &&
                     !userInput.equalsIgnoreCase("it was a good day") &&
                     !userInput.equalsIgnoreCase("no")){
                 System.out.println();
-                System.out.println(currentPlayer + " is the shooter, do you want to keep playing?");
+                System.out.print(currentPlayer + " is the shooter, do you want to keep playing? ");
                 userInput = inputScanner.nextLine().trim();
             }
 
@@ -96,7 +96,7 @@ public class Main {
                         !userInput.equalsIgnoreCase("it was a good day") &&
                         !userInput.equalsIgnoreCase("no")){
                     System.out.println();
-                    System.out.println(currentPlayer + " is the shooter, do you want to keep playing?");
+                    System.out.print(currentPlayer + " is the shooter, do you want to keep playing? ");
                     userInput = inputScanner.nextLine().trim();
                 }
             }
