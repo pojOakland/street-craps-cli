@@ -8,13 +8,20 @@ This application lets you play Street Craps against a friend (or foe).  The appl
 Requires Java 8+
 
 ### Verifying the version of Java installed on your computer
-If you don't know how to verify if Java is installed on your computer, [Click Here](https://www.java.com/en/download/help/version_manual.html#:~:text=The%20Java%20version%20can%20be%20found%20in%20the%20Java%20Control%20Panel.&text=Under%20the%20General%20tab%20in,About)%20showing%20the%20Java%20version.)
+To verify the version of Java installed on your computer, open a terminal/command prompt and type the following command:
+```
+java -version
+```
+
+_Note that version 1.8 is Java 8_
+
+If you do not see a Java version installed on your computer (or your version is below 1.8), [Click Here](https://www.oracle.com/java/technologies/downloads/#java8) to download Java 8.
 
 ### Running the application
 
 1. Download streetcrapscli.jar from the [Releases](https://github.com/WhosBOakland/street-craps-cli/releases) page.
-2. Open a terminal/command prompt and navigate to the directory where you saved streetcrapsli.jar (If you don't know how to navigate in a terminal/command prompt, [Click Here](https://www.git-tower.com/learn/git/ebook/en/command-line/appendix/command-line-101)).
-3. Type the following command in the terminal/command prompt:
+2. Open a terminal/command prompt and navigate to the directory where you saved streetcrapscli.jar (If you don't know how to navigate file directories in a terminal/command prompt, [Click Here](https://www.git-tower.com/learn/git/ebook/en/command-line/appendix/command-line-101)).
+3. Once you have navigated to the correct directory, type the following command in the terminal/command prompt:
 ```
 java -jar streetcrapscli.jar
 ```
