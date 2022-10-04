@@ -5,7 +5,7 @@ This application lets you play Street Craps against a friend (or foe).  The appl
 
 ### Requirements
 
-Requires Java 8+
+Requires Java 11+
 
 ### Verifying the version of Java installed on your computer
 To verify the version of Java installed on your computer, open a terminal/command prompt and type the following command:
@@ -13,9 +13,8 @@ To verify the version of Java installed on your computer, open a terminal/comman
 java -version
 ```
 
-_Note that version 1.8 is Java 8_
 
-If you do not see a Java version installed on your computer (or your version is below 1.8), [Click Here](https://www.oracle.com/java/technologies/downloads/#java8) to download Java 8.
+If you do not see a Java version installed on your computer (or your version is below 11.0.16), [Click Here](https://www.oracle.com/java/technologies/downloads/#java11) to download Java 11.
 
 ### Running the application
 
