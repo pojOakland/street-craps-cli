@@ -11,6 +11,7 @@ public class Game {
     private Player winningPlayer;
     private Player losingPlayer;
     private Roll roll;
+    private SideBet sideBet;
 
     // Constants
     private static final Integer[] IWAGD_ROLL_ARRAY = new Integer[] {7,7,11,7,11,7,4,4};
@@ -30,6 +31,7 @@ public class Game {
             inactivePlayer = players[0];
         }
         roll = new Roll();
+        sideBet = new SideBet();
     }
 
     // Methods
@@ -46,6 +48,7 @@ public class Game {
             winningPlayer.setBankroll(winningPlayer.getBankroll() + stakes);
             losingPlayer.setBankroll(losingPlayer.getBankroll() - stakes);
 
+            System.out.println();
             System.out.println(winningPlayer.getName() + " wins!");
             System.out.println();
             System.out.println("Players current bankrolls:");
@@ -63,6 +66,7 @@ public class Game {
             winningPlayer.setBankroll(winningPlayer.getBankroll() + stakes);
             losingPlayer.setBankroll(losingPlayer.getBankroll() - stakes);
 
+            System.out.println();
             System.out.println(winningPlayer.getName() + " wins!");
             System.out.println();
             System.out.println("Players current bankrolls:");
@@ -78,16 +82,55 @@ public class Game {
 
             System.out.println();
             System.out.println("The point is " + point + ".");
-            System.out.println();
+
+            sideBet.askForSideBet();
 
         }
 
         do {
 
+            System.out.println();
             System.out.println(activePlayer.getName() + " is rolling...");
             roll.newRoll();
             System.out.println(roll.getResult() + " " + roll.getName() + ".");
-            System.out.println();
+            if (sideBet.isSideBetActive()) {
+                sideBet.checkSideBet(point,roll.getResult());
+                if (sideBet.didActivePlayerWin()) {
+                    activePlayer.setBankroll(activePlayer.getBankroll() + stakes);
+                    inactivePlayer.setBankroll(inactivePlayer.getBankroll() - stakes);
+                    sideBet.setSideBetActive(false);
+
+                    System.out.println();
+                    System.out.println(activePlayer.getName() + " wins the side bet!");
+                    System.out.println();
+                    System.out.println("Players current bankrolls:");
+
+                    for (Player player : players) {
+                        System.out.println(player.getName() + ": $" + player.getBankroll());
+                    }
+                    if (roll.getResult() != point && roll.getResult() != 7) {
+                        sideBet.askForSideBet();
+                    }
+
+                }
+                else if (sideBet.didInactivePlayerWin()) {
+                    inactivePlayer.setBankroll(inactivePlayer.getBankroll() + stakes);
+                    activePlayer.setBankroll(activePlayer.getBankroll() - stakes);
+                    sideBet.setSideBetActive(false);
+
+                    System.out.println();
+                    System.out.println(inactivePlayer.getName() + " wins the side bet!");
+                    System.out.println();
+                    System.out.println("Players current bankrolls:");
+
+                    for (Player player : players) {
+                        System.out.println(player.getName() + ": $" + player.getBankroll());
+                    }
+                    if (roll.getResult() != point && roll.getResult() != 7) {
+                        sideBet.askForSideBet();
+                    }
+                }
+            }
 
         } while (roll.getResult() != point && roll.getResult() != 7);
 
@@ -97,9 +140,11 @@ public class Game {
             winningPlayer.setBankroll(winningPlayer.getBankroll() + stakes);
             losingPlayer.setBankroll(losingPlayer.getBankroll() - stakes);
 
-            System.out.println(winningPlayer.getName() + " wins!");
+            System.out.println();
+            System.out.println(winningPlayer.getName() + " wins the point!");
             System.out.println();
             System.out.println("Players current bankrolls:");
+
             for (Player player : players) {
                 System.out.println(player.getName() + ": $" + player.getBankroll());
             }
@@ -113,9 +158,11 @@ public class Game {
             winningPlayer.setBankroll(winningPlayer.getBankroll() + stakes);
             losingPlayer.setBankroll(losingPlayer.getBankroll() - stakes);
 
-            System.out.println(winningPlayer.getName() + " wins!");
+            System.out.println();
+            System.out.println(winningPlayer.getName() + " wins the point!");
             System.out.println();
             System.out.println("Players current bankrolls:");
+
             for (Player player : players) {
                 System.out.println(player.getName() + ": $" + player.getBankroll());
             }
@@ -137,6 +184,7 @@ public class Game {
             winningPlayer.setBankroll(winningPlayer.getBankroll() + stakes);
             losingPlayer.setBankroll(losingPlayer.getBankroll() - stakes);
 
+            System.out.println();
             System.out.println(winningPlayer.getName() + " wins!");
             System.out.println();
             System.out.println("Players current bankrolls:");
@@ -168,9 +216,10 @@ public class Game {
         winningPlayer.setBankroll(winningPlayer.getBankroll() + stakes);
         losingPlayer.setBankroll(losingPlayer.getBankroll() - stakes);
 
-        System.out.println(winningPlayer.getName() + " wins!");
+        System.out.println(winningPlayer.getName() + " wins the point!");
         System.out.println();
         System.out.println("Players current bankrolls:");
+
         for (Player player : players) {
             System.out.println(player.getName() + ": $" + player.getBankroll());
         }
