@@ -38,44 +38,11 @@ public class SideBet {
     public void checkSideBet(int point, int rollResult) {
         switch (point) {
             case 4: case 10:
-                switch (rollResult) {
-                    case 4: case 10:
-                        inactivePlayerWin = false;
-                        activePlayerWin = true; break;
-                    case 7: case 11:
-                        activePlayerWin = false;
-                        inactivePlayerWin = true; break;
-                    case 2: case 3: case 5: case 6: case 8: case 9: case 12:
-                        activePlayerWin = false;
-                        inactivePlayerWin = false; break;
-                }
-                break;
+                handleSideBetWhenPointIs4Or10(rollResult); break;
             case 5: case 9:
-                switch (rollResult) {
-                    case 5: case 9:
-                        inactivePlayerWin = false;
-                        activePlayerWin = true; break;
-                    case 7: case 11:
-                        activePlayerWin = false;
-                        inactivePlayerWin = true; break;
-                    case 2: case 3: case 4: case 6: case 8: case 10: case 12:
-                        activePlayerWin = false;
-                        inactivePlayerWin = false; break;
-                }
-                break;
+                handleSideBetWhenPointIs5Or9(rollResult); break;
             case 6: case 8:
-                switch (rollResult) {
-                    case 6: case 8:
-                        inactivePlayerWin = false;
-                        activePlayerWin = true; break;
-                    case 2: case 3: case 7: case 11: case 12:
-                        activePlayerWin = false;
-                        inactivePlayerWin = true; break;
-                    case 4: case 5: case 9: case 10:
-                        activePlayerWin = false;
-                        inactivePlayerWin = false; break;
-                }
-                break;
+                handleSideBetWhenPointIs6Or8(rollResult); break;
         }
     }
 
@@ -90,5 +57,47 @@ public class SideBet {
             sideBetInput = inputScanner.nextLine().trim();
         }
         sideBetActive = sideBetInput.equalsIgnoreCase("yes");
+    }
+
+    private void handleSideBetWhenPointIs4Or10(int rollResult) {
+        switch (rollResult) {
+            case 4: case 10:
+                inactivePlayerWin = false;
+                activePlayerWin = true; break;
+            case 7: case 11:
+                activePlayerWin = false;
+                inactivePlayerWin = true; break;
+            case 2: case 3: case 5: case 6: case 8: case 9: case 12:
+                activePlayerWin = false;
+                inactivePlayerWin = false; break;
+        }
+    }
+
+    private void handleSideBetWhenPointIs5Or9(int rollResult) {
+        switch (rollResult) {
+            case 5: case 9:
+                inactivePlayerWin = false;
+                activePlayerWin = true; break;
+            case 7: case 11:
+                activePlayerWin = false;
+                inactivePlayerWin = true; break;
+            case 2: case 3: case 4: case 6: case 8: case 10: case 12:
+                activePlayerWin = false;
+                inactivePlayerWin = false; break;
+        }
+    }
+
+    private void handleSideBetWhenPointIs6Or8(int rollResult) {
+        switch (rollResult) {
+            case 6: case 8:
+                inactivePlayerWin = false;
+                activePlayerWin = true; break;
+            case 2: case 3: case 7: case 11: case 12:
+                activePlayerWin = false;
+                inactivePlayerWin = true; break;
+            case 4: case 5: case 9: case 10:
+                activePlayerWin = false;
+                inactivePlayerWin = false; break;
+        }
     }
 }
