@@ -18,7 +18,7 @@ public class Main {
         System.out.println("*       Let's      *");
         System.out.println("*       Shoot      *");
         System.out.println("*       Dice       *");
-        System.out.println("*       V1.0       *");
+        System.out.println("*       V1.1       *");
         System.out.println("********************");
         System.out.println();
 
