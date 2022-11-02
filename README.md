@@ -26,4 +26,4 @@ java -jar streetcrapscli.jar
 ```
 
 ### Author
-Inspired by Ice Cube ([@IceCube](https://twitter.com/icecube)), Made by Ben Oakland ([@WhosBOakland](https://github.com/WhosBOakland)).
+Inspired by Ice Cube ([@IceCube](https://twitter.com/icecube)), Made by Ben Oakland ([@pojOakland](https://github.com/pojOakland)).
