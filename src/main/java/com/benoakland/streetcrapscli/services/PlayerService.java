@@ -1,5 +1,6 @@
 package com.benoakland.streetcrapscli.services;
 import com.benoakland.streetcrapscli.Player;
+import com.benoakland.streetcrapscli.dto.PlayerAuthenticationDto;
 import com.benoakland.streetcrapscli.dto.PlayerRegistrationDto;
 import com.benoakland.streetcrapscli.security.PasswordHasher;
 import com.benoakland.streetcrapscli.util.BasicLogger;
@@ -30,6 +31,11 @@ public class PlayerService {
         }
 
         return returnedPlayer;
+    }
+
+    public PlayerAuthenticationDto authenticatePlayer(String displayName) {
+        return restTemplate.getForObject(API_BASE_URL + "/authenticate/" + displayName,
+                PlayerAuthenticationDto.class);
     }
 
     private PlayerRegistrationDto addNewPlayer() {

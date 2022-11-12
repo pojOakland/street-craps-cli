@@ -1,5 +1,7 @@
 package com.benoakland.streetcrapscli.services;
 
+import com.benoakland.streetcrapscli.Player;
+
 import java.util.Scanner;
 
 public class ConsoleService {
@@ -39,6 +41,19 @@ public class ConsoleService {
             }
         }
         return result;
+    }
+
+    public Player login() {
+        Player returnedPlayer = null;
+        String userInput = "";
+        System.out.print("Enter Display Name: ");
+        System.out.flush();
+        String displayName = scanner.nextLine().trim();
+        System.out.println();
+        System.out.print("Enter Password: ");
+        System.out.flush();
+        String password = scanner.nextLine().trim();
+        return returnedPlayer;
     }
 
     // TODO - encapsulate most interaction with the console
