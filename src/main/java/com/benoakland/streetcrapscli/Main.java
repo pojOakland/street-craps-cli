@@ -36,8 +36,8 @@ public class Main {
         System.out.print("Enter Player 2's name: ");
 
         userInput = inputScanner.nextLine().trim();
-        while (userInput.length() <= 0 || userInput.equalsIgnoreCase(player1.getName())) {
-            if (userInput.equalsIgnoreCase(player1.getName())) {
+        while (userInput.length() <= 0 || userInput.equalsIgnoreCase(player1.getDisplayName())) {
+            if (userInput.equalsIgnoreCase(player1.getDisplayName())) {
                 System.out.println();
                 System.out.println("Players must have different names.");
             }
@@ -70,12 +70,12 @@ public class Main {
         }
 
         System.out.println();
-        System.out.println(players[startingPlayerIndex].getName() + " goes first");
+        System.out.println(players[startingPlayerIndex].getDisplayName() + " goes first");
 
         Game game = new Game(players, stakes, startingPlayerIndex);
 
         do {
-            String currentPlayer = game.run().getName();
+            String currentPlayer = game.run().getDisplayName();
 
             System.out.println();
             System.out.print(currentPlayer + " is the shooter, do you want to keep playing? ");
@@ -90,7 +90,7 @@ public class Main {
             }
 
             while (userInput.equalsIgnoreCase("it was a good day")){
-                currentPlayer = game.itWasAGoodDay().getName();
+                currentPlayer = game.itWasAGoodDay().getDisplayName();
                 userInput = inputScanner.nextLine().trim();
                 while (userInput.length() <= 0 || !userInput.equalsIgnoreCase("yes") &&
                         !userInput.equalsIgnoreCase("it was a good day") &&
@@ -113,13 +113,13 @@ public class Main {
         else if (player1.getBankroll() > player2.getBankroll()) {
 
             System.out.println();
-            System.out.println(player2.getName() + " owes " + player1.getName() + " $" + player1.getBankroll() + ".");
+            System.out.println(player2.getDisplayName() + " owes " + player1.getDisplayName() + " $" + player1.getBankroll() + ".");
 
         }
         else {
 
             System.out.println();
-            System.out.println(player1.getName() + " owes " + player2.getName() + " $" + player2.getBankroll() + ".");
+            System.out.println(player1.getDisplayName() + " owes " + player2.getDisplayName() + " $" + player2.getBankroll() + ".");
 
         }
 
