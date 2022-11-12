@@ -1,5 +1,6 @@
 package com.benoakland.streetcrapscli.services;
 import com.benoakland.streetcrapscli.Player;
+import com.benoakland.streetcrapscli.dto.PlayerRegistrationDto;
 import com.benoakland.streetcrapscli.security.PasswordHasher;
 import com.benoakland.streetcrapscli.util.BasicLogger;
 import org.bouncycastle.util.encoders.Base64;
@@ -19,7 +20,7 @@ public class PlayerService {
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        HttpEntity<Player> entity = new HttpEntity<>(addNewPlayer(), headers);
+        HttpEntity<PlayerRegistrationDto> entity = new HttpEntity<>(addNewPlayer(), headers);
         Player returnedPlayer = null;
 
         try {
@@ -31,7 +32,7 @@ public class PlayerService {
         return returnedPlayer;
     }
 
-    private Player addNewPlayer() {
+    private PlayerRegistrationDto addNewPlayer() {
         ConsoleService consoleService = new ConsoleService();
         PasswordHasher passwordHasher = new PasswordHasher();
         consoleService.displayString("Enter the following information for a new player: ");
@@ -40,7 +41,7 @@ public class PlayerService {
         byte[] salt = passwordHasher.generateRandomSalt();
         String hashedPassword = passwordHasher.computeHash(password, salt);
         String saltString = new String(Base64.encode(salt));
-        Player newPlayer = new Player(displayName, hashedPassword, saltString);
+        PlayerRegistrationDto newPlayer = new PlayerRegistrationDto(displayName, hashedPassword, saltString);
         return newPlayer;
     }
 
