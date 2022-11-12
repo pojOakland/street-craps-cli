@@ -29,11 +29,11 @@ public class Main {
 
         userInput = consoleService.promptForPlayerType(1).toString();
         if (userInput.equalsIgnoreCase("1")) {
-            // TODO - make this work
+            Player player1 = playerService.login();
+            players[0] = player1;
         }
         else if (userInput.equalsIgnoreCase("2")) {
             Player player1 = playerService.createPlayer();
-            player1.setBankroll(0);
             players[0] = player1;
         }
         else if (userInput.equalsIgnoreCase("3")) {
@@ -51,11 +51,11 @@ public class Main {
 
         userInput = consoleService.promptForPlayerType(2).toString();
         if (userInput.equalsIgnoreCase("1")) {
-            // TODO - make this work
+            Player player2 = playerService.createPlayer();
+            players[1] = player2;
         }
         else if (userInput.equalsIgnoreCase("2")) {
             Player player2 = playerService.createPlayer();
-            player2.setBankroll(0);
             players[1] = player2;
         }
         else if (userInput.equalsIgnoreCase("3")) {

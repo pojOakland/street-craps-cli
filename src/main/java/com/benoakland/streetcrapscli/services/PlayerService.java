@@ -17,6 +17,9 @@ public class PlayerService {
     private static final String API_BASE_URL = "http://localhost:8080";
     private final RestTemplate restTemplate = new RestTemplate();
 
+    private final PasswordHasher passwordHasher = new PasswordHasher();
+    private final ConsoleService consoleService = new ConsoleService();
+
     public Player createPlayer() {
 
         HttpHeaders headers = new HttpHeaders();
@@ -55,5 +58,33 @@ public class PlayerService {
         return newPlayer;
     }
 
+    public Player login() {
+        PlayerAuthenticationDto playerAuthenticationDto = null;
+        boolean isAuthenticated = false;
 
+        while (playerAuthenticationDto == null) {
+            try {
+                String displayName = consoleService.promptForString("Enter Display Name: ");
+                PlayerAuthenticationDto returnedPlayerAuthenticationDto = authenticatePlayer(displayName);
+                if (returnedPlayerAuthenticationDto.getDisplayName() != null &&
+                        returnedPlayerAuthenticationDto.getSalt() != null &&
+                        returnedPlayerAuthenticationDto.getHashedPassword() != null) {
+                    playerAuthenticationDto = returnedPlayerAuthenticationDto;
+                }
+            } catch (Exception e) {
+                BasicLogger.log(e.getLocalizedMessage());
+            }
+        }
+
+        String storedSalt = playerAuthenticationDto.getSalt();
+        String storedPassword = playerAuthenticationDto.getHashedPassword();
+
+        while (!isAuthenticated) {
+            String password = consoleService.promptForString("Enter Password: ");
+            String hashedPassword = passwordHasher.computeHash(password, Base64.decode(storedSalt));
+            isAuthenticated = storedPassword.equals(hashedPassword);
+        }
+
+        return getPlayer(playerAuthenticationDto.getDisplayName());
+    }
 }

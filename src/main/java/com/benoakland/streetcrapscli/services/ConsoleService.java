@@ -10,8 +10,6 @@ import java.util.Scanner;
 public class ConsoleService {
 
     private final Scanner scanner = new Scanner(System.in);
-    private final PlayerService playerService = new PlayerService();
-    private final PasswordHasher passwordHasher = new PasswordHasher();
 
     public String promptForString(String prompt) {
         System.out.println(prompt);
@@ -48,26 +46,7 @@ public class ConsoleService {
         return result;
     }
 
-    public Player login() {
-        Player returnedPlayer = null;
-        PlayerAuthenticationDto playerAuthenticationDto = null;
-        boolean sucess = false;
-        String userInput = "";
-        System.out.print("Enter Display Name: ");
-        System.out.flush();
-        String displayName = scanner.nextLine().trim();
-        playerAuthenticationDto = playerService.authenticatePlayer(displayName);
-        String storedSalt = playerAuthenticationDto.getSalt();
-        String storedPassword = playerAuthenticationDto.getHashedPassword();
-        System.out.println();
-        System.out.print("Enter Password: ");
-        System.out.flush();
-        String password = scanner.nextLine().trim();
-        String hashedPassword = passwordHasher.computeHash(password, Base64.decode(storedSalt));
-        sucess = storedPassword.equals(hashedPassword);
-        returnedPlayer = playerService.getPlayer(playerAuthenticationDto.getDisplayName());
-        return returnedPlayer;
-    }
+
 
     // TODO - encapsulate most interaction with the console
 }
