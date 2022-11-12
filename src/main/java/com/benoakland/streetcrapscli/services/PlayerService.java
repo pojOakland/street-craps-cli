@@ -1,6 +1,8 @@
 package com.benoakland.streetcrapscli.services;
 import com.benoakland.streetcrapscli.Player;
+import com.benoakland.streetcrapscli.security.PasswordHasher;
 import com.benoakland.streetcrapscli.util.BasicLogger;
+import org.bouncycastle.util.encoders.Base64;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -13,10 +15,11 @@ public class PlayerService {
     private static final String API_BASE_URL = "http://localhost:8080/players";
     private final RestTemplate restTemplate = new RestTemplate();
 
-    public Player createPlayer(Player newPlayer) {
+    public Player createPlayer() {
+
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        HttpEntity<Player> entity = new HttpEntity<>(newPlayer, headers);
+        HttpEntity<Player> entity = new HttpEntity<>(addNewPlayer(), headers);
         Player returnedPlayer = null;
 
         try {
@@ -26,6 +29,19 @@ public class PlayerService {
         }
 
         return returnedPlayer;
+    }
+
+    private Player addNewPlayer() {
+        ConsoleService consoleService = new ConsoleService();
+        PasswordHasher passwordHasher = new PasswordHasher();
+        consoleService.displayString("Enter the following information for a new player: ");
+        String displayName = consoleService.promptForString("Display Name: ");
+        String password = consoleService.promptForString("Password: ");
+        byte[] salt = passwordHasher.generateRandomSalt();
+        String hashedPassword = passwordHasher.computeHash(password, salt);
+        String saltString = new String(Base64.encode(salt));
+        Player newPlayer = new Player(displayName, hashedPassword, saltString);
+        return newPlayer;
     }
 
 

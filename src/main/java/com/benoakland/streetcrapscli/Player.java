@@ -28,6 +28,14 @@ public class Player {
         this.salt = salt;
     }
 
+    public Player(String displayName, int lifetimeBalance, int lifetimeGames, String hashedPassword, String salt) {
+        this.displayName = displayName;
+        this.lifetimeBalance = lifetimeBalance;
+        this.lifetimeGames = lifetimeGames;
+        this.hashedPassword = hashedPassword;
+        this.salt = salt;
+    }
+
     // Getters/Setters
     public String getDisplayName() {
         return displayName;
@@ -41,16 +49,5 @@ public class Player {
         this.bankroll = bankroll;
     }
 
-    public Player addNewPlayer() {
-        ConsoleService consoleService = new ConsoleService();
-        PasswordHasher passwordHasher = new PasswordHasher();
-        consoleService.displayString("Enter the following information for a new player: ");
-        String displayName = consoleService.promptForString("Display Name: ");
-        String password = consoleService.promptForString("Password: ");
-        byte[] salt = passwordHasher.generateRandomSalt();
-        String hashedPassword = passwordHasher.computeHash(password, salt);
-        String saltString = new String(Base64.encode(salt));
-        Player newPlayer = new Player(displayName, hashedPassword, saltString);
-        return newPlayer;
-    }
+
 }
