@@ -14,7 +14,7 @@ import org.springframework.web.client.RestTemplate;
 
 public class PlayerService {
 
-    private static final String API_BASE_URL = "http://localhost:8080/players";
+    private static final String API_BASE_URL = "http://localhost:8080";
     private final RestTemplate restTemplate = new RestTemplate();
 
     public Player createPlayer() {
@@ -25,7 +25,7 @@ public class PlayerService {
         Player returnedPlayer = null;
 
         try {
-            returnedPlayer = restTemplate.postForObject(API_BASE_URL + "/create", entity, Player.class);
+            returnedPlayer = restTemplate.postForObject(API_BASE_URL + "/player/create", entity, Player.class);
         } catch (RestClientResponseException | ResourceAccessException e) {
             BasicLogger.log(e.getMessage());
         }
@@ -33,8 +33,12 @@ public class PlayerService {
         return returnedPlayer;
     }
 
+    public Player getPlayer(String displayName) {
+        return restTemplate.getForObject(API_BASE_URL + "/player/" + displayName, Player.class);
+    }
+
     public PlayerAuthenticationDto authenticatePlayer(String displayName) {
-        return restTemplate.getForObject(API_BASE_URL + "/authenticate/" + displayName,
+        return restTemplate.getForObject(API_BASE_URL + "/player/authenticate/" + displayName,
                 PlayerAuthenticationDto.class);
     }
 
