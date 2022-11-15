@@ -1,5 +1,6 @@
 package com.benoakland.streetcrapscli;
 
+import com.benoakland.streetcrapscli.dto.PlayerUpdateDto;
 import com.benoakland.streetcrapscli.services.ConsoleService;
 import com.benoakland.streetcrapscli.services.PlayerService;
 
@@ -51,7 +52,7 @@ public class Main {
 
         userInput = consoleService.promptForPlayerType(2).toString();
         if (userInput.equalsIgnoreCase("1")) {
-            Player player2 = playerService.createPlayer();
+            Player player2 = playerService.login();
             players[1] = player2;
         }
         else if (userInput.equalsIgnoreCase("2")) {
@@ -149,6 +150,26 @@ public class Main {
             System.out.println();
             System.out.println(players[0].getDisplayName() + " owes " + players[1].getDisplayName() + " $" + players[1].getBankroll() + ".");
 
+        }
+        System.out.println();
+        if (players[0].getId() != 0) {
+            PlayerUpdateDto player1Update = new PlayerUpdateDto(players[0].getId(),players[0].getBankroll());
+            boolean isSuccessful = playerService.updatePlayer(player1Update);
+            if (isSuccessful) {
+                players[0] = playerService.getPlayer(players[0].getDisplayName());
+                consoleService.displayString(players[0].getDisplayName() + " has now played " + players[0].getLifetimeGames() + " games!");
+                consoleService.displayString(players[0].getDisplayName() + "'s lifetime balance is $" + players[0].getLifetimeBalance());
+            }
+        }
+        System.out.println();
+        if (players[1].getId() != 0) {
+            PlayerUpdateDto player1Update = new PlayerUpdateDto(players[1].getId(),players[1].getBankroll());
+            boolean isSuccessful = playerService.updatePlayer(player1Update);
+            if (isSuccessful) {
+                players[1] = playerService.getPlayer(players[1].getDisplayName());
+                consoleService.displayString(players[1].getDisplayName() + " has now played " + players[1].getLifetimeGames() + " games!");
+                consoleService.displayString(players[1].getDisplayName() + "'s lifetime balance is $" + players[1].getLifetimeBalance());
+            }
         }
 
         inputScanner.close();

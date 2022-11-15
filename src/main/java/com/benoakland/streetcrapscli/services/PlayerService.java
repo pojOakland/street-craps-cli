@@ -2,11 +2,13 @@ package com.benoakland.streetcrapscli.services;
 import com.benoakland.streetcrapscli.Player;
 import com.benoakland.streetcrapscli.dto.PlayerAuthenticationDto;
 import com.benoakland.streetcrapscli.dto.PlayerRegistrationDto;
+import com.benoakland.streetcrapscli.dto.PlayerUpdateDto;
 import com.benoakland.streetcrapscli.security.PasswordHasher;
 import com.benoakland.streetcrapscli.util.BasicLogger;
 import org.bouncycastle.util.encoders.Base64;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestClientResponseException;
@@ -43,6 +45,21 @@ public class PlayerService {
     public PlayerAuthenticationDto authenticatePlayer(String displayName) {
         return restTemplate.getForObject(API_BASE_URL + "/player/authenticate/" + displayName,
                 PlayerAuthenticationDto.class);
+    }
+
+    public Boolean updatePlayer(PlayerUpdateDto playerUpdateDto) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<PlayerUpdateDto> entity = new HttpEntity<>(playerUpdateDto, headers);
+
+        boolean isSuccessful = false;
+        try {
+            restTemplate.put(API_BASE_URL + "/player/update", entity);
+            isSuccessful = true;
+        } catch (RestClientResponseException | ResourceAccessException e) {
+            BasicLogger.log(e.getLocalizedMessage());
+        }
+        return isSuccessful;
     }
 
     private PlayerRegistrationDto addNewPlayer() {
