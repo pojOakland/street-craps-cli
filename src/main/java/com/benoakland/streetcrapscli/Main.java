@@ -29,43 +29,37 @@ public class Main {
 
         userInput = consoleService.promptForPlayerType(1).toString();
         if (userInput.equalsIgnoreCase("1")) {
-            Player player1 = playerService.login();
+            consoleService.printBlankLine();
+            Player player1 = playerService.login("");
             players[0] = player1;
         }
         else if (userInput.equalsIgnoreCase("2")) {
+            consoleService.printBlankLine();
             Player player1 = playerService.createPlayer();
             players[0] = player1;
         }
         else if (userInput.equalsIgnoreCase("3")) {
             consoleService.printBlankLine();
-            userInput = consoleService.promptForString("Enter Player 1's name: ");
-            while (userInput.length() <= 0) {
-                userInput = consoleService.promptForString("Enter Player 1's name: ");
-            }
-            Player player1 = new Player(userInput);
+            Player player1 = new Player(consoleService.promptForPlayer1DisplayName());
             players[0] = player1;
         }
 
+        consoleService.printBlankLine();
+
         userInput = consoleService.promptForPlayerType(2).toString();
         if (userInput.equalsIgnoreCase("1")) {
-            Player player2 = playerService.login();
+            consoleService.printBlankLine();
+            Player player2 = playerService.login(players[0].getDisplayName());
             players[1] = player2;
         }
         else if (userInput.equalsIgnoreCase("2")) {
+            consoleService.printBlankLine();
             Player player2 = playerService.createPlayer();
             players[1] = player2;
         }
         else if (userInput.equalsIgnoreCase("3")) {
             consoleService.printBlankLine();
-            userInput = consoleService.promptForString("Enter Player 2's name: ");
-            while (userInput.length() <= 0 || userInput.equalsIgnoreCase(players[0].getDisplayName())) {
-                if (userInput.equalsIgnoreCase(players[0].getDisplayName())) {
-                    consoleService.printBlankLine();
-                    consoleService.printString("Players must have different names.");
-                }
-                userInput = consoleService.promptForString("Enter Player 2's name: ");
-            }
-            Player player2 = new Player(userInput);
+            Player player2 = new Player(consoleService.promptForPlayer2DisplayName(players[0].getDisplayName()));
             players[1] = player2;
         }
 

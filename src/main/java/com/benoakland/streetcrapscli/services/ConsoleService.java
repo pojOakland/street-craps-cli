@@ -7,7 +7,7 @@ public class ConsoleService {
     private final Scanner scanner = new Scanner(System.in);
 
     public String promptForString(String prompt) {
-        System.out.println(prompt);
+        System.out.print(prompt);
         return scanner.nextLine();
     }
 
@@ -19,27 +19,46 @@ public class ConsoleService {
         System.out.println();
     }
 
+    public String promptForPlayer1DisplayName() {
+        String userInput = promptForString("Enter Player 1's name: ");
+        while (userInput.length() <= 0) {
+            userInput = promptForString("Enter Player 1's name: ");
+        }
+        return userInput;
+    }
+
+    public String promptForPlayer2DisplayName(String player1DisplayName) {
+        String userInput = promptForString("Enter Player 2's name: ");
+        while (userInput.length() <= 0 || userInput.equalsIgnoreCase(player1DisplayName)) {
+            if (userInput.equalsIgnoreCase(player1DisplayName)) {
+                printBlankLine();
+                printString("Players must have different names.");
+            }
+            userInput = promptForString("Enter Player 2's name: ");
+        }
+        return userInput;
+    }
+
     public Integer promptForPlayerType(int playerNumber) {
         int result = 0;
         String userInput = "";
-        System.out.println("[1] Log in");
-        System.out.println("[2] Register");
-        System.out.println("[3] Play as guest");
-        System.out.print("Select an option for Player " + playerNumber + ": ");
+        printString("[1] Log in");
+        printString("[2] Register");
+        printString("[3] Play as guest");
         while (result == 0) {
             try {
-                userInput = scanner.nextLine().trim();
+                userInput = promptForString("Select an option for Player " + playerNumber + ": ");
                 while (userInput.length() <= 0 || Integer.parseInt(userInput) < 1 || Integer.parseInt(userInput) > 3) {
-                    System.out.println();
-                    System.out.println("Invalid entry!");
-                    System.out.println();
-                    userInput = scanner.nextLine().trim();
+                    printBlankLine();
+                    printString("Invalid entry!");
+                    printBlankLine();
+                    userInput = promptForString("Select an option for Player " + playerNumber + ": ");
                 }
                 result = Integer.parseInt(userInput);
             } catch (Exception e) {
-                System.out.println();
-                System.out.println("Invalid entry!");
-                System.out.println();
+                printBlankLine();
+                printString("Invalid entry!");
+                printBlankLine();
             }
         }
         return result;
