@@ -1,10 +1,5 @@
 package com.benoakland.streetcrapscli.services;
 
-import com.benoakland.streetcrapscli.Player;
-import com.benoakland.streetcrapscli.dto.PlayerAuthenticationDto;
-import com.benoakland.streetcrapscli.security.PasswordHasher;
-import org.bouncycastle.util.encoders.Base64;
-
 import java.util.Scanner;
 
 public class ConsoleService {
@@ -16,23 +11,27 @@ public class ConsoleService {
         return scanner.nextLine();
     }
 
-    public void displayString(String str) {
+    public void printString(String str) {
         System.out.println(str);
+    }
+
+    public void printBlankLine() {
+        System.out.println();
     }
 
     public Integer promptForPlayerType(int playerNumber) {
         int result = 0;
         String userInput = "";
-        System.out.println("Select an option for Player " + playerNumber + ":");
         System.out.println("[1] Log in");
         System.out.println("[2] Register");
         System.out.println("[3] Play as guest");
+        System.out.print("Select an option for Player " + playerNumber + ": ");
         while (result == 0) {
             try {
                 userInput = scanner.nextLine().trim();
                 while (userInput.length() <= 0 || Integer.parseInt(userInput) < 1 || Integer.parseInt(userInput) > 3) {
                     System.out.println();
-                    System.out.printf("Invalid entry!");
+                    System.out.println("Invalid entry!");
                     System.out.println();
                     userInput = scanner.nextLine().trim();
                 }

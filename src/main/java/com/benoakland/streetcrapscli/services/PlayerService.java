@@ -8,7 +8,6 @@ import com.benoakland.streetcrapscli.util.BasicLogger;
 import org.bouncycastle.util.encoders.Base64;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestClientResponseException;
@@ -65,7 +64,7 @@ public class PlayerService {
     private PlayerRegistrationDto addNewPlayer() {
         ConsoleService consoleService = new ConsoleService();
         PasswordHasher passwordHasher = new PasswordHasher();
-        consoleService.displayString("Enter the following information for a new player: ");
+        consoleService.printString("Enter the following information for a new player: ");
         String displayName = consoleService.promptForString("Display Name: ");
         String password = consoleService.promptForString("Password: ");
         byte[] salt = passwordHasher.generateRandomSalt();
