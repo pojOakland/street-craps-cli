@@ -44,8 +44,4 @@ public class ConsoleService {
         }
         return result;
     }
-
-
-
-    // TODO - encapsulate most interaction with the console
 }
