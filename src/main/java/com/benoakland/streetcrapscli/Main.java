@@ -40,7 +40,7 @@ public class Main {
         }
         else if (userInput.equalsIgnoreCase("3")) {
             consoleService.printBlankLine();
-            Player player1 = new Player(consoleService.promptForPlayer1DisplayName());
+            Player player1 = new Player(consoleService.promptForPlayerDisplayName());
             players[0] = player1;
         }
 
@@ -59,7 +59,7 @@ public class Main {
         }
         else if (userInput.equalsIgnoreCase("3")) {
             consoleService.printBlankLine();
-            Player player2 = new Player(consoleService.promptForPlayer2DisplayName(players[0].getDisplayName()));
+            Player player2 = new Player(consoleService.promptForPlayerDisplayName(players[0].getDisplayName()));
             players[1] = player2;
         }
 

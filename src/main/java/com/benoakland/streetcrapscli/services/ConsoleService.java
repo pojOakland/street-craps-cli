@@ -19,7 +19,7 @@ public class ConsoleService {
         System.out.println();
     }
 
-    public String promptForPlayer1DisplayName() {
+    public String promptForPlayerDisplayName() {
         String userInput = promptForString("Enter Player 1's name: ");
         while (userInput.length() <= 0) {
             userInput = promptForString("Enter Player 1's name: ");
@@ -27,10 +27,10 @@ public class ConsoleService {
         return userInput;
     }
 
-    public String promptForPlayer2DisplayName(String player1DisplayName) {
+    public String promptForPlayerDisplayName(String playerDisplayName) {
         String userInput = promptForString("Enter Player 2's name: ");
-        while (userInput.length() <= 0 || userInput.equalsIgnoreCase(player1DisplayName)) {
-            if (userInput.equalsIgnoreCase(player1DisplayName)) {
+        while (userInput.length() <= 0 || userInput.equalsIgnoreCase(playerDisplayName)) {
+            if (userInput.equalsIgnoreCase(playerDisplayName)) {
                 printBlankLine();
                 printString("Players must have different names.");
             }

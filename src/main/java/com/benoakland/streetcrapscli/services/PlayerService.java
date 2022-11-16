@@ -66,7 +66,7 @@ public class PlayerService {
         PasswordHasher passwordHasher = new PasswordHasher();
         String displayName = "";
         boolean isUnique = false;
-        while (!isUnique) {
+        while (!isUnique) { // - TODO encapsulate
             consoleService.printString("Enter the following information for a new player: ");
             displayName = consoleService.promptForString("Display Name: ");
             Player checkPlayer = getPlayer(displayName);
@@ -97,12 +97,12 @@ public class PlayerService {
                     if (player1DisplayName.equalsIgnoreCase("")) {
                         consoleService.printBlankLine();
                         consoleService.printString("Canceling login! Creating a guest player!");
-                        return new Player(consoleService.promptForPlayer1DisplayName());
+                        return new Player(consoleService.promptForPlayerDisplayName());
                     }
                     else {
                         consoleService.printBlankLine();
                         consoleService.printString("Canceling login! Creating a guest player!");
-                        return new Player(consoleService.promptForPlayer2DisplayName(player1DisplayName));
+                        return new Player(consoleService.promptForPlayerDisplayName(player1DisplayName));
                     }
                 }
                 if (!displayName.equalsIgnoreCase(player1DisplayName)) {
@@ -132,12 +132,12 @@ public class PlayerService {
                 if (player1DisplayName.equalsIgnoreCase("")) {
                     consoleService.printBlankLine();
                     consoleService.printString("Canceling login! Creating a guest player!");
-                    return new Player(consoleService.promptForPlayer1DisplayName());
+                    return new Player(consoleService.promptForPlayerDisplayName());
                 }
                 else {
                     consoleService.printBlankLine();
                     consoleService.printString("Canceling login! Creating a guest player!");
-                    return new Player(consoleService.promptForPlayer2DisplayName(player1DisplayName));
+                    return new Player(consoleService.promptForPlayerDisplayName(player1DisplayName));
                 }
             }
             String hashedPassword = passwordHasher.computeHash(password, Base64.decode(storedSalt));
