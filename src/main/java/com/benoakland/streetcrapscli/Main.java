@@ -23,7 +23,7 @@ public class Main {
         consoleService.printString("*       Let's      *");
         consoleService.printString("*       Shoot      *");
         consoleService.printString("*       Dice       *");
-        consoleService.printString("*       V1.1       *");
+        consoleService.printString("*       V1.2       *");
         consoleService.printString("********************");
         consoleService.printBlankLine();
 
