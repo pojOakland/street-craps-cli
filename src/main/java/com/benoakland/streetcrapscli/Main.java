@@ -137,7 +137,8 @@ public class Main {
             boolean isSuccessful = playerService.updatePlayer(player1Update);
             if (isSuccessful) {
                 players[0] = playerService.getPlayer(players[0].getDisplayName());
-                consoleService.printString(players[0].getDisplayName() + " has now played " + players[0].getLifetimeGames() + " games!");
+                consoleService.printString(players[0].getDisplayName() + " has now played " + players[0].getLifetimeGames()
+                        + " game" + (players[0].getLifetimeGames() == 1 ? "" : "s") + "!");
                 consoleService.printString(players[0].getDisplayName() + "'s lifetime balance is $" + players[0].getLifetimeBalance());
             }
         }
@@ -147,7 +148,8 @@ public class Main {
             boolean isSuccessful = playerService.updatePlayer(player1Update);
             if (isSuccessful) {
                 players[1] = playerService.getPlayer(players[1].getDisplayName());
-                consoleService.printString(players[1].getDisplayName() + " has now played " + players[1].getLifetimeGames() + " games!");
+                consoleService.printString(players[1].getDisplayName() + " has now played " + players[1].getLifetimeGames()
+                        + " game" + (players[1].getLifetimeGames() == 1 ? "" : "s") + "!");
                 consoleService.printString(players[1].getDisplayName() + "'s lifetime balance is $" + players[1].getLifetimeBalance());
             }
         }
