@@ -16,10 +16,8 @@ import org.springframework.web.client.RestTemplate;
 public class PlayerService {
 
     public static PlayerService playerServiceInstance = new PlayerService();
-
     private static final String API_BASE_URL = "http://localhost:8080";
     private final RestTemplate restTemplate = new RestTemplate();
-
     private final PasswordHasher passwordHasher = new PasswordHasher();
 
     public Player createPlayer() {
@@ -71,9 +69,7 @@ public class PlayerService {
             displayName = ConsoleService.consoleServiceInstance.promptForString("Display Name: ");
             Player checkPlayer = getPlayer(displayName);
             if (checkPlayer.getDisplayName() != null) {
-                ConsoleService.consoleServiceInstance.printBlankLine();
-                ConsoleService.consoleServiceInstance.printString("That Display Name is already taken!");
-                ConsoleService.consoleServiceInstance.printBlankLine();
+                ConsoleService.consoleServiceInstance.printString("\nThat Display Name is already taken!\n");
             }
             else {
                 isUnique = true;
@@ -87,6 +83,7 @@ public class PlayerService {
     }
 
     public Player login(String player1DisplayName) {
+        // This method intentionally does not have pieces encapsulated to limit how long the plain text password is in memory
         PlayerAuthenticationDto playerAuthenticationDto = null;
         boolean isAuthenticated = false;
 
@@ -95,13 +92,11 @@ public class PlayerService {
                 String displayName = ConsoleService.consoleServiceInstance.promptForString("Enter Display Name (Enter 0 to cancel): ");
                 if (displayName.equalsIgnoreCase("0")) {
                     if (player1DisplayName.equalsIgnoreCase("")) {
-                        ConsoleService.consoleServiceInstance.printBlankLine();
-                        ConsoleService.consoleServiceInstance.printString("Canceling login! Creating a guest player!");
+                        ConsoleService.consoleServiceInstance.printString("\nCanceling login! Creating a guest player!");
                         return new Player(ConsoleService.consoleServiceInstance.promptForPlayerDisplayName());
                     }
                     else {
-                        ConsoleService.consoleServiceInstance.printBlankLine();
-                        ConsoleService.consoleServiceInstance.printString("Canceling login! Creating a guest player!");
+                        ConsoleService.consoleServiceInstance.printString("\nCanceling login! Creating a guest player!");
                         return new Player(ConsoleService.consoleServiceInstance.promptForPlayerDisplayName(player1DisplayName));
                     }
                 }
@@ -114,9 +109,7 @@ public class PlayerService {
                     }
                 }
                 else {
-                    ConsoleService.consoleServiceInstance.printBlankLine();
-                    ConsoleService.consoleServiceInstance.printString("Players must have different names.");
-                    ConsoleService.consoleServiceInstance.printBlankLine();
+                    ConsoleService.consoleServiceInstance.printString("\nPlayers must have different names.\n");
                 }
             } catch (Exception e) {
                 BasicLogger.log(e.getLocalizedMessage());
@@ -130,13 +123,11 @@ public class PlayerService {
             String password = ConsoleService.consoleServiceInstance.promptForString("Enter Password (Enter 0 to cancel): ");
             if (password.equalsIgnoreCase("0")) {
                 if (player1DisplayName.equalsIgnoreCase("")) {
-                    ConsoleService.consoleServiceInstance.printBlankLine();
-                    ConsoleService.consoleServiceInstance.printString("Canceling login! Creating a guest player!");
+                    ConsoleService.consoleServiceInstance.printString("\nCanceling login! Creating a guest player!");
                     return new Player(ConsoleService.consoleServiceInstance.promptForPlayerDisplayName());
                 }
                 else {
-                    ConsoleService.consoleServiceInstance.printBlankLine();
-                    ConsoleService.consoleServiceInstance.printString("Canceling login! Creating a guest player!");
+                    ConsoleService.consoleServiceInstance.printString("\nCanceling login! Creating a guest player!");
                     return new Player(ConsoleService.consoleServiceInstance.promptForPlayerDisplayName(player1DisplayName));
                 }
             }

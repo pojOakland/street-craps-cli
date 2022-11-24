@@ -40,8 +40,7 @@ public class Game {
     // Methods
     public Player run() {
 
-        ConsoleService.consoleServiceInstance.printBlankLine();
-        ConsoleService.consoleServiceInstance.printString(activePlayer.getDisplayName() + " is coming out...");
+        ConsoleService.consoleServiceInstance.printString("\n" + activePlayer.getDisplayName() + " is coming out...");
         roll.newRoll();
         ConsoleService.consoleServiceInstance.printString(roll.getResult() + " " + roll.getName() + ".");
 
@@ -51,10 +50,8 @@ public class Game {
             winningPlayer.setBankroll(winningPlayer.getBankroll() + stakes);
             losingPlayer.setBankroll(losingPlayer.getBankroll() - stakes);
 
-            ConsoleService.consoleServiceInstance.printBlankLine();
-            ConsoleService.consoleServiceInstance.printString(winningPlayer.getDisplayName() + " wins!");
-            ConsoleService.consoleServiceInstance.printBlankLine();
-            ConsoleService.consoleServiceInstance.printString("Players current bankrolls:");
+            ConsoleService.consoleServiceInstance.printString("\n" + winningPlayer.getDisplayName() + " wins!");
+            ConsoleService.consoleServiceInstance.printString("\nPlayers current bankrolls:");
 
             for (Player player : players) {
                 ConsoleService.consoleServiceInstance.printString(player.getDisplayName() + ": $" + player.getBankroll());
@@ -69,10 +66,8 @@ public class Game {
             winningPlayer.setBankroll(winningPlayer.getBankroll() + stakes);
             losingPlayer.setBankroll(losingPlayer.getBankroll() - stakes);
 
-            ConsoleService.consoleServiceInstance.printBlankLine();
-            ConsoleService.consoleServiceInstance.printString(winningPlayer.getDisplayName() + " wins!");
-            ConsoleService.consoleServiceInstance.printBlankLine();
-            ConsoleService.consoleServiceInstance.printString("Players current bankrolls:");
+            ConsoleService.consoleServiceInstance.printString("\n" + winningPlayer.getDisplayName() + " wins!");
+            ConsoleService.consoleServiceInstance.printString("\nPlayers current bankrolls:");
 
             for (Player player : players) {
                 ConsoleService.consoleServiceInstance.printString(player.getDisplayName() + ": $" + player.getBankroll());
@@ -83,8 +78,7 @@ public class Game {
         else {
             point = roll.getResult();
 
-            ConsoleService.consoleServiceInstance.printBlankLine();
-            ConsoleService.consoleServiceInstance.printString("The point is " + point + ".");
+            ConsoleService.consoleServiceInstance.printString("\nThe point is " + point + ".");
 
             sideBet.askForSideBet();
 
@@ -92,8 +86,7 @@ public class Game {
 
         do {
 
-            ConsoleService.consoleServiceInstance.printBlankLine();
-            ConsoleService.consoleServiceInstance.printString(activePlayer.getDisplayName() + " is rolling...");
+            ConsoleService.consoleServiceInstance.printString("\n" + activePlayer.getDisplayName() + " is rolling...");
             roll.newRoll();
             ConsoleService.consoleServiceInstance.printString(roll.getResult() + " " + roll.getName() + ".");
             if (sideBet.isSideBetActive()) {
@@ -103,10 +96,8 @@ public class Game {
                     inactivePlayer.setBankroll(inactivePlayer.getBankroll() - stakes);
                     sideBet.setSideBetActive(false);
 
-                    ConsoleService.consoleServiceInstance.printBlankLine();
-                    ConsoleService.consoleServiceInstance.printString(activePlayer.getDisplayName() + " wins the side bet!");
-                    ConsoleService.consoleServiceInstance.printBlankLine();
-                    ConsoleService.consoleServiceInstance.printString("Players current bankrolls:");
+                    ConsoleService.consoleServiceInstance.printString("\n" + activePlayer.getDisplayName() + " wins the side bet!");
+                    ConsoleService.consoleServiceInstance.printString("\nPlayers current bankrolls:");
 
                     for (Player player : players) {
                         ConsoleService.consoleServiceInstance.printString(player.getDisplayName() + ": $" + player.getBankroll());
@@ -121,10 +112,8 @@ public class Game {
                     activePlayer.setBankroll(activePlayer.getBankroll() - stakes);
                     sideBet.setSideBetActive(false);
 
-                    ConsoleService.consoleServiceInstance.printBlankLine();
-                    ConsoleService.consoleServiceInstance.printString(inactivePlayer.getDisplayName() + " wins the side bet!");
-                    ConsoleService.consoleServiceInstance.printBlankLine();
-                    ConsoleService.consoleServiceInstance.printString("Players current bankrolls:");
+                    ConsoleService.consoleServiceInstance.printString("\n" + inactivePlayer.getDisplayName() + " wins the side bet!");
+                    ConsoleService.consoleServiceInstance.printString("\nPlayers current bankrolls:");
 
                     for (Player player : players) {
                         ConsoleService.consoleServiceInstance.printString(player.getDisplayName() + ": $" + player.getBankroll());
@@ -143,10 +132,8 @@ public class Game {
             winningPlayer.setBankroll(winningPlayer.getBankroll() + stakes);
             losingPlayer.setBankroll(losingPlayer.getBankroll() - stakes);
 
-            ConsoleService.consoleServiceInstance.printBlankLine();
-            ConsoleService.consoleServiceInstance.printString(winningPlayer.getDisplayName() + " wins the point!");
-            ConsoleService.consoleServiceInstance.printBlankLine();
-            ConsoleService.consoleServiceInstance.printString("Players current bankrolls:");
+            ConsoleService.consoleServiceInstance.printString("\n" + winningPlayer.getDisplayName() + " wins the point!");
+            ConsoleService.consoleServiceInstance.printString("\nPlayers current bankrolls:");
 
             for (Player player : players) {
                 ConsoleService.consoleServiceInstance.printString(player.getDisplayName() + ": $" + player.getBankroll());
@@ -161,10 +148,8 @@ public class Game {
             winningPlayer.setBankroll(winningPlayer.getBankroll() + stakes);
             losingPlayer.setBankroll(losingPlayer.getBankroll() - stakes);
 
-            ConsoleService.consoleServiceInstance.printBlankLine();
-            ConsoleService.consoleServiceInstance.printString(winningPlayer.getDisplayName() + " wins the point!");
-            ConsoleService.consoleServiceInstance.printBlankLine();
-            ConsoleService.consoleServiceInstance.printString("Players current bankrolls:");
+            ConsoleService.consoleServiceInstance.printString("\n" + winningPlayer.getDisplayName() + " wins the point!");
+            ConsoleService.consoleServiceInstance.printString("\nPlayers current bankrolls:");
 
             for (Player player : players) {
                 ConsoleService.consoleServiceInstance.printString(player.getDisplayName() + ": $" + player.getBankroll());
@@ -179,54 +164,43 @@ public class Game {
         losingPlayer = inactivePlayer;
 
         for (int i = 0; i < 6; i++) {
-            ConsoleService.consoleServiceInstance.printBlankLine();
-            ConsoleService.consoleServiceInstance.printString(activePlayer.getDisplayName() + " is coming out...");
+            ConsoleService.consoleServiceInstance.printString("\n" + activePlayer.getDisplayName() + " is coming out...");
             ConsoleService.consoleServiceInstance.printString(IWAGD_ROLL_ARRAY[i] + IWAGD_ROLL_NAME_ARRAY[i]);
 
             winningPlayer.setBankroll(winningPlayer.getBankroll() + stakes);
             losingPlayer.setBankroll(losingPlayer.getBankroll() - stakes);
 
-            ConsoleService.consoleServiceInstance.printBlankLine();
-            ConsoleService.consoleServiceInstance.printString(winningPlayer.getDisplayName() + " wins!");
-            ConsoleService.consoleServiceInstance.printBlankLine();
-            ConsoleService.consoleServiceInstance.printString("Players current bankrolls:");
+            ConsoleService.consoleServiceInstance.printString("\n" + winningPlayer.getDisplayName() + " wins!");
+            ConsoleService.consoleServiceInstance.printString("\nPlayers current bankrolls:");
 
             for (Player player : players) {
                 ConsoleService.consoleServiceInstance.printString(player.getDisplayName() + ": $" + player.getBankroll());
             }
 
-            ConsoleService.consoleServiceInstance.printBlankLine();
-            ConsoleService.consoleServiceInstance.printString(activePlayer.getDisplayName() + " is the shooter, do you want to keep playing?");
+            ConsoleService.consoleServiceInstance.printString("\n" + activePlayer.getDisplayName() + " is the shooter, do you want to keep playing?");
             ConsoleService.consoleServiceInstance.printString("yes");
 
         }
 
-        ConsoleService.consoleServiceInstance.printBlankLine();
-        ConsoleService.consoleServiceInstance.printString(activePlayer.getDisplayName() + " is coming out...");
+        ConsoleService.consoleServiceInstance.printString("\n" + activePlayer.getDisplayName() + " is coming out...");
         ConsoleService.consoleServiceInstance.printString(IWAGD_ROLL_ARRAY[6] + IWAGD_ROLL_NAME_ARRAY[6]);
 
         point = IWAGD_ROLL_ARRAY[6];
 
-        ConsoleService.consoleServiceInstance.printBlankLine();
-        ConsoleService.consoleServiceInstance.printString("The point is " + point + ".");
-        ConsoleService.consoleServiceInstance.printBlankLine();
+        ConsoleService.consoleServiceInstance.printString("\nThe point is " + point + ".");
 
-        ConsoleService.consoleServiceInstance.printString(activePlayer.getDisplayName() + " is rolling...");
+        ConsoleService.consoleServiceInstance.printString("\n" + activePlayer.getDisplayName() + " is rolling...");
         ConsoleService.consoleServiceInstance.printString(IWAGD_ROLL_ARRAY[7] + IWAGD_ROLL_NAME_ARRAY[7]);
-        ConsoleService.consoleServiceInstance.printBlankLine();
 
         winningPlayer.setBankroll(winningPlayer.getBankroll() + stakes);
         losingPlayer.setBankroll(losingPlayer.getBankroll() - stakes);
 
-        ConsoleService.consoleServiceInstance.printString(winningPlayer.getDisplayName() + " wins the point!");
-        ConsoleService.consoleServiceInstance.printBlankLine();
-        ConsoleService.consoleServiceInstance.printString("Players current bankrolls:");
+        ConsoleService.consoleServiceInstance.printString("\n" + winningPlayer.getDisplayName() + " wins the point!");
+        ConsoleService.consoleServiceInstance.printString("\nPlayers current bankrolls:");
 
         for (Player player : players) {
             ConsoleService.consoleServiceInstance.printString(player.getDisplayName() + ": $" + player.getBankroll());
         }
-
-        ConsoleService.consoleServiceInstance.printBlankLine();
 
         return activePlayer;
     }

@@ -52,8 +52,7 @@ public class SideBet {
         String sideBetInput = "";
         while (sideBetInput.length() <= 0 || !sideBetInput.equalsIgnoreCase("yes") && !sideBetInput.equalsIgnoreCase("no")) {
 
-            ConsoleService.consoleServiceInstance.printBlankLine();
-            sideBetInput = ConsoleService.consoleServiceInstance.promptForString("Would you like a side bet? ");
+            sideBetInput = ConsoleService.consoleServiceInstance.promptForString("\nWould you like a side bet? ");
         }
         sideBetActive = sideBetInput.equalsIgnoreCase("yes");
     }
