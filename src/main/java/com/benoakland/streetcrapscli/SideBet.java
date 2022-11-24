@@ -11,8 +11,6 @@ public class SideBet {
     private boolean activePlayerWin;
     private boolean inactivePlayerWin;
 
-    private final ConsoleService consoleService = new ConsoleService();
-
     // Constructors
     public SideBet() {
         sideBetActive = false;
@@ -54,8 +52,8 @@ public class SideBet {
         String sideBetInput = "";
         while (sideBetInput.length() <= 0 || !sideBetInput.equalsIgnoreCase("yes") && !sideBetInput.equalsIgnoreCase("no")) {
 
-            consoleService.printBlankLine();
-            sideBetInput = consoleService.promptForString("Would you like a side bet? ");
+            ConsoleService.consoleServiceInstance.printBlankLine();
+            sideBetInput = ConsoleService.consoleServiceInstance.promptForString("Would you like a side bet? ");
         }
         sideBetActive = sideBetInput.equalsIgnoreCase("yes");
     }

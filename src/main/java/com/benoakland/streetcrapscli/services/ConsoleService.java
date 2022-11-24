@@ -3,6 +3,7 @@ package com.benoakland.streetcrapscli.services;
 import java.util.Scanner;
 
 public class ConsoleService {
+    public static ConsoleService consoleServiceInstance = new ConsoleService();
 
     private final Scanner scanner = new Scanner(System.in);
 
