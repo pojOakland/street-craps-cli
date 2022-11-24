@@ -10,7 +10,6 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Main {
 
     public static void main(String[] args) {
-        PlayerService playerService = new PlayerService();
         String userInput;
         int stakes = 0;
         int startingPlayerIndex = ThreadLocalRandom.current().nextInt(0, 2);
@@ -29,12 +28,12 @@ public class Main {
         userInput = ConsoleService.consoleServiceInstance.promptForPlayerType(1).toString();
         if (userInput.equalsIgnoreCase("1")) {
             ConsoleService.consoleServiceInstance.printBlankLine();
-            Player player1 = playerService.login("");
+            Player player1 = PlayerService.playerServiceInstance.login("");
             players[0] = player1;
         }
         else if (userInput.equalsIgnoreCase("2")) {
             ConsoleService.consoleServiceInstance.printBlankLine();
-            Player player1 = playerService.createPlayer();
+            Player player1 = PlayerService.playerServiceInstance.createPlayer();
             players[0] = player1;
         }
         else if (userInput.equalsIgnoreCase("3")) {
@@ -48,12 +47,12 @@ public class Main {
         userInput = ConsoleService.consoleServiceInstance.promptForPlayerType(2).toString();
         if (userInput.equalsIgnoreCase("1")) {
             ConsoleService.consoleServiceInstance.printBlankLine();
-            Player player2 = playerService.login(players[0].getDisplayName());
+            Player player2 = PlayerService.playerServiceInstance.login(players[0].getDisplayName());
             players[1] = player2;
         }
         else if (userInput.equalsIgnoreCase("2")) {
             ConsoleService.consoleServiceInstance.printBlankLine();
-            Player player2 = playerService.createPlayer();
+            Player player2 = PlayerService.playerServiceInstance.createPlayer();
             players[1] = player2;
         }
         else if (userInput.equalsIgnoreCase("3")) {
@@ -133,9 +132,9 @@ public class Main {
         ConsoleService.consoleServiceInstance.printBlankLine();
         if (players[0].getId() != 0) {
             PlayerUpdateDto player1Update = new PlayerUpdateDto(players[0].getId(),players[0].getBankroll());
-            boolean isSuccessful = playerService.updatePlayer(player1Update);
+            boolean isSuccessful = PlayerService.playerServiceInstance.updatePlayer(player1Update);
             if (isSuccessful) {
-                players[0] = playerService.getPlayer(players[0].getDisplayName());
+                players[0] = PlayerService.playerServiceInstance.getPlayer(players[0].getDisplayName());
                 ConsoleService.consoleServiceInstance.printString(players[0].getDisplayName() + " has now played " + players[0].getLifetimeGames()
                         + " game" + (players[0].getLifetimeGames() == 1 ? "" : "s") + "!");
                 ConsoleService.consoleServiceInstance.printString(players[0].getDisplayName() + "'s lifetime balance is $" + players[0].getLifetimeBalance());
@@ -144,9 +143,9 @@ public class Main {
         ConsoleService.consoleServiceInstance.printBlankLine();
         if (players[1].getId() != 0) {
             PlayerUpdateDto player1Update = new PlayerUpdateDto(players[1].getId(),players[1].getBankroll());
-            boolean isSuccessful = playerService.updatePlayer(player1Update);
+            boolean isSuccessful = PlayerService.playerServiceInstance.updatePlayer(player1Update);
             if (isSuccessful) {
-                players[1] = playerService.getPlayer(players[1].getDisplayName());
+                players[1] = PlayerService.playerServiceInstance.getPlayer(players[1].getDisplayName());
                 ConsoleService.consoleServiceInstance.printString(players[1].getDisplayName() + " has now played " + players[1].getLifetimeGames()
                         + " game" + (players[1].getLifetimeGames() == 1 ? "" : "s") + "!");
                 ConsoleService.consoleServiceInstance.printString(players[1].getDisplayName() + "'s lifetime balance is $" + players[1].getLifetimeBalance());
