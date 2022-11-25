@@ -3,9 +3,17 @@ package com.benoakland.streetcrapscli.services;
 import java.util.Scanner;
 
 public class ConsoleService {
-    public static ConsoleService consoleServiceInstance = new ConsoleService();
-
+    private static ConsoleService instance;
     private final Scanner scanner = new Scanner(System.in);
+
+    private ConsoleService(){};
+
+    public static synchronized ConsoleService getInstance() {
+        if (instance == null) {
+            instance = new ConsoleService();
+        }
+        return instance;
+    }
 
     public String promptForString(String prompt) {
         System.out.print(prompt);

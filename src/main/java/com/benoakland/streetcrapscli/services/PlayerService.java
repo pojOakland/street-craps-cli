@@ -15,10 +15,19 @@ import org.springframework.web.client.RestTemplate;
 
 public class PlayerService {
 
-    public static PlayerService playerServiceInstance = new PlayerService();
+    private static PlayerService instance;
     private static final String API_BASE_URL = "http://localhost:8080";
     private final RestTemplate restTemplate = new RestTemplate();
     private final PasswordHasher passwordHasher = new PasswordHasher();
+
+    private PlayerService(){};
+
+    public static synchronized PlayerService getInstance() {
+        if (instance == null) {
+            instance = new PlayerService();
+        }
+        return instance;
+    }
 
     public Player createPlayer() {
 
@@ -65,17 +74,17 @@ public class PlayerService {
         String displayName = "";
         boolean isUnique = false;
         while (!isUnique) { // - TODO encapsulate
-            ConsoleService.consoleServiceInstance.printString("Enter the following information for a new player: ");
-            displayName = ConsoleService.consoleServiceInstance.promptForString("Display Name: ");
+            ConsoleService.getInstance().printString("Enter the following information for a new player: ");
+            displayName = ConsoleService.getInstance().promptForString("Display Name: ");
             Player checkPlayer = getPlayer(displayName);
             if (checkPlayer.getDisplayName() != null) {
-                ConsoleService.consoleServiceInstance.printString("\nThat Display Name is already taken!\n");
+                ConsoleService.getInstance().printString("\nThat Display Name is already taken!\n");
             }
             else {
                 isUnique = true;
             }
         }
-        String password = ConsoleService.consoleServiceInstance.promptForString("Password: ");
+        String password = ConsoleService.getInstance().promptForString("Password: ");
         byte[] salt = passwordHasher.generateRandomSalt();
         String hashedPassword = passwordHasher.computeHash(password, salt);
         String saltString = new String(Base64.encode(salt));
@@ -89,15 +98,15 @@ public class PlayerService {
 
         while (playerAuthenticationDto == null) {
             try {
-                String displayName = ConsoleService.consoleServiceInstance.promptForString("Enter Display Name (Enter 0 to cancel): ");
+                String displayName = ConsoleService.getInstance().promptForString("Enter Display Name (Enter 0 to cancel): ");
                 if (displayName.equalsIgnoreCase("0")) {
                     if (player1DisplayName.equalsIgnoreCase("")) {
-                        ConsoleService.consoleServiceInstance.printString("\nCanceling login! Creating a guest player!");
-                        return new Player(ConsoleService.consoleServiceInstance.promptForPlayerDisplayName());
+                        ConsoleService.getInstance().printString("\nCanceling login! Creating a guest player!");
+                        return new Player(ConsoleService.getInstance().promptForPlayerDisplayName());
                     }
                     else {
-                        ConsoleService.consoleServiceInstance.printString("\nCanceling login! Creating a guest player!");
-                        return new Player(ConsoleService.consoleServiceInstance.promptForPlayerDisplayName(player1DisplayName));
+                        ConsoleService.getInstance().printString("\nCanceling login! Creating a guest player!");
+                        return new Player(ConsoleService.getInstance().promptForPlayerDisplayName(player1DisplayName));
                     }
                 }
                 if (!displayName.equalsIgnoreCase(player1DisplayName)) {
@@ -109,7 +118,7 @@ public class PlayerService {
                     }
                 }
                 else {
-                    ConsoleService.consoleServiceInstance.printString("\nPlayers must have different names.\n");
+                    ConsoleService.getInstance().printString("\nPlayers must have different names.\n");
                 }
             } catch (Exception e) {
                 BasicLogger.log(e.getLocalizedMessage());
@@ -120,15 +129,15 @@ public class PlayerService {
         String storedPassword = playerAuthenticationDto.getHashedPassword();
 
         while (!isAuthenticated) {
-            String password = ConsoleService.consoleServiceInstance.promptForString("Enter Password (Enter 0 to cancel): ");
+            String password = ConsoleService.getInstance().promptForString("Enter Password (Enter 0 to cancel): ");
             if (password.equalsIgnoreCase("0")) {
                 if (player1DisplayName.equalsIgnoreCase("")) {
-                    ConsoleService.consoleServiceInstance.printString("\nCanceling login! Creating a guest player!");
-                    return new Player(ConsoleService.consoleServiceInstance.promptForPlayerDisplayName());
+                    ConsoleService.getInstance().printString("\nCanceling login! Creating a guest player!");
+                    return new Player(ConsoleService.getInstance().promptForPlayerDisplayName());
                 }
                 else {
-                    ConsoleService.consoleServiceInstance.printString("\nCanceling login! Creating a guest player!");
-                    return new Player(ConsoleService.consoleServiceInstance.promptForPlayerDisplayName(player1DisplayName));
+                    ConsoleService.getInstance().printString("\nCanceling login! Creating a guest player!");
+                    return new Player(ConsoleService.getInstance().promptForPlayerDisplayName(player1DisplayName));
                 }
             }
             String hashedPassword = passwordHasher.computeHash(password, Base64.decode(storedSalt));
