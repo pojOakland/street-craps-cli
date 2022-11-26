@@ -1,6 +1,6 @@
 package com.benoakland.streetcrapscli;
 
-import java.util.Scanner;
+import com.benoakland.streetcrapscli.services.ConsoleService;
 
 public class SideBet {
 
@@ -48,13 +48,9 @@ public class SideBet {
 
     public void askForSideBet() {
         String sideBetInput = "";
-        Scanner inputScanner = new Scanner(System.in);
         while (sideBetInput.length() <= 0 || !sideBetInput.equalsIgnoreCase("yes") && !sideBetInput.equalsIgnoreCase("no")) {
 
-            System.out.println();
-            System.out.print("Would you like a side bet? ");
-
-            sideBetInput = inputScanner.nextLine().trim();
+            sideBetInput = ConsoleService.getInstance().promptForString("\nWould you like a side bet? ");
         }
         sideBetActive = sideBetInput.equalsIgnoreCase("yes");
     }

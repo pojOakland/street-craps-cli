@@ -1,128 +1,119 @@
 package com.benoakland.streetcrapscli;
 
-import java.util.Scanner;
+import com.benoakland.streetcrapscli.services.ConsoleService;
+import com.benoakland.streetcrapscli.services.PlayerService;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Main {
 
     public static void main(String[] args) {
-        Scanner inputScanner = new Scanner(System.in);
         String userInput;
         int stakes = 0;
         int startingPlayerIndex = ThreadLocalRandom.current().nextInt(0, 2);
         Player[] players = new Player[2];
         boolean keepPlaying;
 
-        System.out.println();
-        System.out.println("********************");
-        System.out.println("*       Let's      *");
-        System.out.println("*       Shoot      *");
-        System.out.println("*       Dice       *");
-        System.out.println("*       V1.1       *");
-        System.out.println("********************");
-        System.out.println();
+        ConsoleService.getInstance().printString("\n********************");
+        ConsoleService.getInstance().printString("*       Let's      *");
+        ConsoleService.getInstance().printString("*       Shoot      *");
+        ConsoleService.getInstance().printString("*       Dice       *");
+        ConsoleService.getInstance().printString("*       V1.2       *");
+        ConsoleService.getInstance().printString("********************");
 
-        System.out.print("Enter Player 1's name: ");
-
-        userInput = inputScanner.nextLine().trim();
-        while (userInput.length() <= 0) {
-            System.out.print("Enter Player 1's name: ");
-            userInput = inputScanner.nextLine().trim();
+        userInput = ConsoleService.getInstance().promptForPlayerType(1).toString();
+        if (userInput.equalsIgnoreCase("1")) {
+            Player player1 = PlayerService.getInstance().login("");
+            players[0] = player1;
         }
-        Player player1 = new Player(userInput);
-        players[0] = player1;
-
-        System.out.println();
-        System.out.print("Enter Player 2's name: ");
-
-        userInput = inputScanner.nextLine().trim();
-        while (userInput.length() <= 0 || userInput.equalsIgnoreCase(player1.getName())) {
-            if (userInput.equalsIgnoreCase(player1.getName())) {
-                System.out.println();
-                System.out.println("Players must have different names.");
-            }
-            System.out.print("Enter Player 2's name: ");
-            userInput = inputScanner.nextLine().trim();
+        else if (userInput.equalsIgnoreCase("2")) {
+            Player player1 = PlayerService.getInstance().createPlayer();
+            players[0] = player1;
         }
-        Player player2 = new Player(userInput);
-        players[1] = player2;
+        else if (userInput.equalsIgnoreCase("3")) {
+            Player player1 = new Player(ConsoleService.getInstance().promptForPlayerDisplayName());
+            players[0] = player1;
+        }
 
-        System.out.println();
-        System.out.print("Enter the stakes for the game: ");
+        userInput = ConsoleService.getInstance().promptForPlayerType(2).toString();
+        if (userInput.equalsIgnoreCase("1")) {
+            Player player2 = PlayerService.getInstance().login(players[0].getDisplayName());
+            players[1] = player2;
+        }
+        else if (userInput.equalsIgnoreCase("2")) {
+            Player player2 = PlayerService.getInstance().createPlayer();
+            players[1] = player2;
+        }
+        else if (userInput.equalsIgnoreCase("3")) {
+            Player player2 = new Player(ConsoleService.getInstance().promptForPlayerDisplayName(players[0].getDisplayName()));
+            players[1] = player2;
+        }
 
         while (stakes == 0) {
             try {
-                userInput = inputScanner.nextLine().trim();
+                userInput = ConsoleService.getInstance().promptForString("\nEnter the stakes for the game: ");
                 while (userInput.length() <= 0 || Integer.parseInt(userInput) <= 0) {
                     if (Integer.parseInt(userInput) <= 0) {
-                        System.out.println();
-                        System.out.println("Stakes must be a positive whole number");
-                        System.out.print("Enter the stakes for the game: ");
+                        ConsoleService.getInstance().printString("\nStakes must be a positive whole number!\n");
                     }
-                    userInput = inputScanner.nextLine().trim();
+                    userInput = ConsoleService.getInstance().promptForString("Enter the stakes for the game: ");
                 }
                 stakes = Integer.parseInt(userInput);
             } catch (Exception e) {
-                System.out.println();
-                System.out.println("Stakes must be a positive whole number");
-                System.out.print("Enter the stakes for the game: ");
+                ConsoleService.getInstance().printString("\nStakes must be a positive whole number!");
             }
         }
 
-        System.out.println();
-        System.out.println(players[startingPlayerIndex].getName() + " goes first");
+        ConsoleService.getInstance().printString("\n" + players[startingPlayerIndex].getDisplayName() + " goes first");
 
         Game game = new Game(players, stakes, startingPlayerIndex);
 
         do {
-            String currentPlayer = game.run().getName();
+            String currentPlayer = game.run().getDisplayName();
 
-            System.out.println();
-            System.out.print(currentPlayer + " is the shooter, do you want to keep playing? ");
-
-            userInput = inputScanner.nextLine().trim();
+            userInput = ConsoleService.getInstance().promptForString("\n" + currentPlayer + " is the shooter, do you want to keep playing? ");
             while (userInput.length() <= 0 || !userInput.equalsIgnoreCase("yes") &&
                     !userInput.equalsIgnoreCase("it was a good day") &&
                     !userInput.equalsIgnoreCase("no")){
-                System.out.println();
-                System.out.print(currentPlayer + " is the shooter, do you want to keep playing? ");
-                userInput = inputScanner.nextLine().trim();
+                userInput = ConsoleService.getInstance().promptForString("\n" + currentPlayer + " is the shooter, do you want to keep playing? ");
             }
 
             while (userInput.equalsIgnoreCase("it was a good day")){
-                currentPlayer = game.itWasAGoodDay().getName();
-                userInput = inputScanner.nextLine().trim();
+                currentPlayer = game.itWasAGoodDay().getDisplayName();
+                userInput = ConsoleService.getInstance().promptForString("\n" + currentPlayer + " is the shooter, do you want to keep playing? ");
                 while (userInput.length() <= 0 || !userInput.equalsIgnoreCase("yes") &&
                         !userInput.equalsIgnoreCase("it was a good day") &&
                         !userInput.equalsIgnoreCase("no")){
-                    System.out.println();
-                    System.out.print(currentPlayer + " is the shooter, do you want to keep playing? ");
-                    userInput = inputScanner.nextLine().trim();
+                    userInput = ConsoleService.getInstance().promptForString("\n" + currentPlayer + " is the shooter, do you want to keep playing? ");
                 }
             }
             keepPlaying = userInput.equalsIgnoreCase("yes");
 
         } while (keepPlaying);
 
-        if (player1.getBankroll() == player2.getBankroll()) {
+        if (players[0].getBankroll() == players[1].getBankroll()) {
 
-            System.out.println();
-            System.out.println("The game ends all square.");
+            ConsoleService.getInstance().printString("\nThe game ends all square.\n");
 
         }
-        else if (player1.getBankroll() > player2.getBankroll()) {
+        else if (players[0].getBankroll() > players[1].getBankroll()) {
 
-            System.out.println();
-            System.out.println(player2.getName() + " owes " + player1.getName() + " $" + player1.getBankroll() + ".");
+            ConsoleService.getInstance().printString("\n" + players[1].getDisplayName() + " owes " + players[0].getDisplayName() + " $" + players[0].getBankroll() + ".\n");
 
         }
         else {
 
-            System.out.println();
-            System.out.println(player1.getName() + " owes " + player2.getName() + " $" + player2.getBankroll() + ".");
+            ConsoleService.getInstance().printString("\n" + players[0].getDisplayName() + " owes " + players[1].getDisplayName() + " $" + players[1].getBankroll() + ".\n");
 
         }
+        if (players[0].getId() != 0) {
 
-        inputScanner.close();
+            PlayerService.getInstance().updatePlayer(players[0]);
+
+        }
+        if (players[1].getId() != 0) {
+
+            PlayerService.getInstance().updatePlayer(players[1]);
+
+        }
     }
 }
