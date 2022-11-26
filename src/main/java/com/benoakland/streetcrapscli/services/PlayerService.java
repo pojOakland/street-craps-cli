@@ -20,7 +20,7 @@ public class PlayerService {
     private final RestTemplate restTemplate = new RestTemplate();
     private final PasswordHasher passwordHasher = new PasswordHasher();
 
-    private PlayerService(){};
+    private PlayerService(){}
 
     public static synchronized PlayerService getInstance() {
         if (instance == null) {
@@ -54,7 +54,18 @@ public class PlayerService {
                 PlayerAuthenticationDto.class);
     }
 
-    public Boolean updatePlayer(PlayerUpdateDto playerUpdateDto) {
+    public void updatePlayer(Player player) {
+        PlayerUpdateDto playerUpdate = new PlayerUpdateDto(player.getId(),player.getBankroll());
+        boolean isSuccessful = PlayerService.getInstance().putPlayer(playerUpdate);
+        if (isSuccessful) {
+            player = PlayerService.getInstance().getPlayer(player.getDisplayName());
+            ConsoleService.getInstance().printString(player.getDisplayName() + " has now played " + player.getLifetimeGames()
+                    + " game" + (player.getLifetimeGames() == 1 ? "" : "s") + "!");
+            ConsoleService.getInstance().printString(player.getDisplayName() + "'s lifetime balance is $" + player.getLifetimeBalance());
+        }
+    }
+
+    private Boolean putPlayer(PlayerUpdateDto playerUpdateDto) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<PlayerUpdateDto> entity = new HttpEntity<>(playerUpdateDto, headers);

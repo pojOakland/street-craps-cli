@@ -1,6 +1,5 @@
 package com.benoakland.streetcrapscli;
 
-import com.benoakland.streetcrapscli.dto.PlayerUpdateDto;
 import com.benoakland.streetcrapscli.services.ConsoleService;
 import com.benoakland.streetcrapscli.services.PlayerService;
 import java.util.concurrent.ThreadLocalRandom;
@@ -107,24 +106,14 @@ public class Main {
 
         }
         if (players[0].getId() != 0) {
-            PlayerUpdateDto player1Update = new PlayerUpdateDto(players[0].getId(),players[0].getBankroll());
-            boolean isSuccessful = PlayerService.getInstance().updatePlayer(player1Update);
-            if (isSuccessful) {
-                players[0] = PlayerService.getInstance().getPlayer(players[0].getDisplayName());
-                ConsoleService.getInstance().printString(players[0].getDisplayName() + " has now played " + players[0].getLifetimeGames()
-                        + " game" + (players[0].getLifetimeGames() == 1 ? "" : "s") + "!");
-                ConsoleService.getInstance().printString(players[0].getDisplayName() + "'s lifetime balance is $" + players[0].getLifetimeBalance());
-            }
+
+            PlayerService.getInstance().updatePlayer(players[0]);
+
         }
         if (players[1].getId() != 0) {
-            PlayerUpdateDto player1Update = new PlayerUpdateDto(players[1].getId(),players[1].getBankroll());
-            boolean isSuccessful = PlayerService.getInstance().updatePlayer(player1Update);
-            if (isSuccessful) {
-                players[1] = PlayerService.getInstance().getPlayer(players[1].getDisplayName());
-                ConsoleService.getInstance().printString("\n" + players[1].getDisplayName() + " has now played " + players[1].getLifetimeGames()
-                        + " game" + (players[1].getLifetimeGames() == 1 ? "" : "s") + "!");
-                ConsoleService.getInstance().printString(players[1].getDisplayName() + "'s lifetime balance is $" + players[1].getLifetimeBalance());
-            }
+
+            PlayerService.getInstance().updatePlayer(players[1]);
+
         }
     }
 }

@@ -1,11 +1,5 @@
 package com.benoakland.streetcrapscli;
 
-import com.benoakland.streetcrapscli.security.PasswordHasher;
-import com.benoakland.streetcrapscli.services.ConsoleService;
-import org.bouncycastle.util.encoders.Base64;
-
-import java.util.Scanner;
-
 public class Player {
 
     // Properties

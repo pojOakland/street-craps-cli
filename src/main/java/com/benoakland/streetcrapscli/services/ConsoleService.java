@@ -6,7 +6,7 @@ public class ConsoleService {
     private static ConsoleService instance;
     private final Scanner scanner = new Scanner(System.in);
 
-    private ConsoleService(){};
+    private ConsoleService(){}
 
     public static synchronized ConsoleService getInstance() {
         if (instance == null) {

@@ -2,8 +2,6 @@ package com.benoakland.streetcrapscli;
 
 import com.benoakland.streetcrapscli.services.ConsoleService;
 
-import java.util.Scanner;
-
 public class SideBet {
 
     // Properties
